@@ -1,0 +1,163 @@
+/* ==========================================================================
+   AICONIC — mobile refinement layer
+   Loaded last, so these rules win over the inline styles in index.html.
+   Everything here is scoped to a max-width query: desktop is untouched.
+   Safe to edit. Safe to delete (site still works, just less polished on phones).
+
+   NOTE on the [style*="…"] selectors below:
+   the DC runtime re-serialises every inline style through the CSSOM, so what
+   ends up in the DOM is the SPACED form — `position: fixed`, not
+   `position:fixed`, and `repeat(7, 1fr)`, not `repeat(7,1fr)`. Selectors are
+   therefore written against the spaced form (with the unspaced form kept
+   alongside as a fallback) so they actually match at runtime.
+   ========================================================================== */
+
+/* --- Applies at every size ------------------------------------------------ */
+
+html {
+  -webkit-text-size-adjust: 100%;   /* stop Safari inflating text in landscape */
+  text-size-adjust: 100%;
+}
+
+/* Never let a long word or URL force a sideways scroll */
+body { overflow-wrap: break-word; }
+
+
+/* --- Phones and small tablets (<= 900px) ---------------------------------- */
+@media (max-width: 900px) {
+
+  /* iOS Safari zooms the whole page when you focus an input under 16px.
+     The site's fields are 15px. This is the single most noticeable
+     mobile bug on the contact and booking forms. */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+
+  /* Comfortable thumb targets everywhere, not just in the footer */
+  button, [role="button"], summary {
+    min-height: 44px;
+  }
+
+  /* Booking modal calendar fits seven columns on a phone.
+     The 44px tap-target min-height just above, combined with each day
+     cell's aspect-ratio:1/1, was forcing every cell to 44px WIDE — so the
+     seven columns (plus gaps) overflowed the ~264px modal and the Sunday
+     column was clipped off the right edge. Drop the square ratio for these
+     cells and give them a fixed, still-tappable height so all seven fit. */
+  div[style*="grid-template-columns: repeat(7, 1fr)"] > button,
+  div[style*="grid-template-columns:repeat(7,1fr)"] > button {
+    aspect-ratio: auto !important;
+    min-height: 40px !important;
+    height: 40px !important;
+  }
+
+  /* Kill the desktop-only custom cursor logic on touch devices */
+  body.om-cursor, body.om-cursor * { cursor: auto !important; }
+
+  /* Any 2- or 3-across grid that was still hard-coded collapses to one column */
+  [style*="grid-template-columns: repeat(3, 1fr)"],
+  [style*="grid-template-columns:repeat(3,1fr)"],
+  [style*="grid-template-columns: repeat(2, minmax(0, 1fr))"],
+  [style*="grid-template-columns:repeat(2,minmax(0,1fr))"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
+/* --- About photo ----------------------------------------------------------
+   Wide enough for two columns, the photo stretches to exactly match the height
+   of the text column beside it.
+
+   Below 1000px the columns get narrow, which makes the text column tall and
+   would squeeze the photo into a skinny sliver (at 768px it worked out to a
+   0.28 width/height ratio). So the About row stacks early, at 1000px rather
+   than the 708px the auto-fit grid would pick on its own, and the photo goes
+   back to a fixed 4:5 portrait.
+   -------------------------------------------------------------------------- */
+@media (max-width: 999px) {
+  [data-rev-uniform]:has(img[alt="Founder of AICONIC"]) {
+    grid-template-columns: 1fr !important;
+  }
+  img[alt="Founder of AICONIC"] {
+    height: auto !important;
+    aspect-ratio: 4 / 5 !important;
+  }
+  div:has(> img[alt="Founder of AICONIC"]) {
+    flex: 0 0 auto !important;
+    min-height: 0 !important;
+  }
+}
+
+
+/* --- Narrow phones (<= 560px) --------------------------------------------- */
+@media (max-width: 560px) {
+
+  /* Fixed header: tighten the outer gutter so the wordmark, Book button and
+     hamburger still fit side by side on a 360px screen, and respect the
+     notch / dynamic island. */
+  header[style*="position: fixed"],
+  header[style*="position:fixed"] {
+    padding: 10px max(12px, env(safe-area-inset-left)) 10px max(12px, env(safe-area-inset-right)) !important;
+  }
+  header[style*="position: fixed"] > div:first-child,
+  header[style*="position:fixed"] > div:first-child {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    height: 66px !important;
+    gap: 10px !important;
+  }
+
+  /* Section gutters: the desktop 30px padding eats too much of a small screen */
+  section > div[style*="max-width: 1160px"],
+  section > div[style*="max-width:1160px"],
+  section > div[style*="max-width: 1040px"],
+  section > div[style*="max-width:1040px"] {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  /* Home-screen bottom bar / gesture area shouldn't cover the footer */
+  footer {
+    padding-bottom: max(28px, env(safe-area-inset-bottom)) !important;
+  }
+
+  /* The demo modal renders a full site in an iframe. Give it more height
+     on a phone, where 76vh leaves a lot of dead space. */
+  div[style*="height: 76vh"],
+  div[style*="height:76vh"] {
+    height: 82vh !important;
+  }
+
+  /* Horizontal logo / review marquees: slow them slightly so they're
+     readable at phone width instead of whipping past. */
+  [style*="om-marquee"] {
+    animation-duration: 34s !important;
+  }
+}
+
+
+/* --- Very narrow (<= 380px: iPhone SE, older Androids) -------------------- */
+@media (max-width: 380px) {
+  header[style*="position: fixed"] > div:first-child,
+  header[style*="position:fixed"] > div:first-child {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  /* Wordmark shrinks so the Book button never wraps or clips */
+  header[style*="position: fixed"] > div:first-child > div:first-child,
+  header[style*="position:fixed"] > div:first-child > div:first-child {
+    font-size: 17px !important;
+    gap: 7px !important;
+  }
+}
+
+
+/* --- Respect the system reduced-motion setting ---------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

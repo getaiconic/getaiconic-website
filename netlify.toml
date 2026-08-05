@@ -1,0 +1,54 @@
+# AICONIC — Netlify configuration
+# No build step. Netlify publishes this folder exactly as it is.
+
+[build]
+  publish = "."
+  command = ""
+
+# src/ holds the editable design file and the ES-module copy of content.js.
+# Neither is needed in production, but Netlify has no ignore list, so they
+# just sit there unreferenced. Delete the folder before deploy if you would
+# rather they were not public.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), interest-cohort=()"
+
+# The HTML changes every time you edit the site, so never cache it hard.
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Fingerprint-free but rarely-changing files. One week, revalidate after.
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/mobile.css"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+# Vendored libraries are version-pinned and will never change in place.
+[[headers]]
+  for = "/assets/vendor/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+# The site does all its routing in memory, so there are no real sub-paths.
+# This makes a mistyped URL land on the site instead of a Netlify 404 page.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

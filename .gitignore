@@ -1,0 +1,10 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+
+# Local review/screenshot artifacts
+.review/
+
+# Node (only used for local tooling, never committed)
+node_modules/
