@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>AICONIC</title>
+  <script>
+    // Static-host SPA fallback (GitHub Pages, cPanel, etc.). A deep link such as
+    // /work/summit-plumbing has no matching file, so the host serves this page.
+    // We stash the intended path, then bounce to the app; index.html restores it
+    // with history.replaceState on boot, so the correct page/demo opens.
+    // On Netlify the catch-all redirect in netlify.toml serves index.html first,
+    // so this file is never reached there.
+    try {
+      sessionStorage.setItem("aiconic:path", location.pathname + location.search + location.hash);
+    } catch (e) {}
+    location.replace("/");
+  </script>
+</head>
+<body></body>
+</html>

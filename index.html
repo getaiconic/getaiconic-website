@@ -2081,6 +2081,11 @@ body.om-loading{overflow:hidden}
       <span style="font-family:'DM Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#9EA0A8;font-weight:500">Our work</span>
       <h2 style="font-size:clamp(30px,4.4vw,52px);line-height:1.02;font-weight:700;letter-spacing:-.03em;margin:14px 0 0">Real sites you can <em style="font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400">click through.</em></h2>
       <p style="color:#9EA0A8;font-size:17px;margin:18px auto 0;max-width:min(100%,58ch)">Every build is a fast, booking-ready site wired into follow-up and reviews. Scroll each preview, or open it fullscreen and use it like a real visitor would.</p>
+      <form onSubmit="{{ runDemoSearch }}" style="display:flex;gap:10px;margin:26px auto 0;max-width:min(100%,440px)">
+        <input value="{{ demoQuery }}" onInput="{{ setDemoQuery }}" type="text" aria-label="Search demos by trade" placeholder="Search by trade — plumbing, roofing, HVAC…" style="flex:1;min-width:0;background:#0A0A0B;border:1px solid rgba(255,255,255,.16);border-radius:4px;color:#F4F4F1;font-family:inherit;font-size:15px;padding:12px 14px">
+        <button type="submit" style="flex:0 0 auto;font-family:inherit;font-weight:600;font-size:14px;padding:12px 18px;border-radius:2px;border:1px solid #F4F4F1;background:#F4F4F1;color:#0A0A0B;cursor:pointer">Open →</button>
+      </form>
+      <sc-if value="{{ demoNoMatch }}"><div style="font-family:'DM Mono',ui-monospace,monospace;font-size:12px;color:#9EA0A8;margin-top:10px">No demo matches that yet — scroll the ten builds below.</div></sc-if>
     </div>
     <div data-rev-slow="2" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:26px;margin-top:44px">
       <sc-for list="{{ demoCards }}" as="d" hint-placeholder-count="4">
@@ -2492,6 +2497,13 @@ body.om-loading{overflow:hidden}
           <label style="font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9EA0A8;display:block;margin-bottom:7px">What do you need help with?</label>
           <textarea name="message" rows="4" placeholder="Tell us a bit about your business and goals" style="width:100%;background:#0A0A0B;border:1px solid rgba(255,255,255,.16);border-radius:4px;color:#F4F4F1;font-family:inherit;font-size:15px;padding:13px 14px;resize:vertical"></textarea>
         </div>
+        <div>
+          <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:13px;line-height:1.55;color:#9EA0A8">
+            <input name="consent" type="checkbox" style="margin-top:3px;width:16px;height:16px;flex:0 0 auto;accent-color:#F4F4F1;cursor:pointer">
+            <span>I agree to receive texts from AICONIC about my enquiry. Message and data rates may apply. Message frequency varies. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase. See our <span onClick="{{ goLegal_privacy }}" style="color:#E8E8E6;text-decoration:underline;cursor:pointer">Privacy notice</span>.</span>
+          </label>
+          <sc-if value="{{ errConsent }}"><div style="color:#C9C9C7;font-size:12.5px;font-family:'DM Mono',ui-monospace,monospace;margin-top:6px">Please tick the box so we can text you back.</div></sc-if>
+        </div>
         <button type="submit" style="margin-top:6px;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;font-weight:600;font-size:15px;padding:14px 24px;border-radius:2px;border:1px solid #F4F4F1;background:#F4F4F1;color:#0A0A0B;cursor:pointer;transition:transform .18s" style-hover="transform:translateY(-2px)">Send message →</button>
       </form>
     </div>
@@ -2611,6 +2623,10 @@ body.om-loading{overflow:hidden}
               </sc-for>
             </select>
             <div style="font-family:'DM Mono',ui-monospace,monospace;font-size:12px;color:#9EA0A8;min-height:18px">{{ bookSummary }}</div>
+            <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:12.5px;line-height:1.55;color:#9EA0A8">
+              <input checked="{{ bookConsent }}" onChange="{{ setBookConsent }}" type="checkbox" style="margin-top:2px;width:16px;height:16px;flex:0 0 auto;accent-color:#F4F4F1;cursor:pointer">
+              <span>I agree to receive calls and texts from AICONIC about this booking. Message and data rates may apply. Reply STOP to opt out. Consent is not a condition of purchase.</span>
+            </label>
             <button onClick="{{ confirmBooking }}" style="{{ confirmCss }}">Confirm booking</button>
             <sc-if value="{{ bookError }}"><div style="color:#C9C9C7;font-size:12.5px;font-family:'DM Mono',ui-monospace,monospace">{{ bookError }}</div></sc-if>
           </div>
@@ -2742,24 +2758,27 @@ function slotCell(active) {
     : base + "border:1px solid rgba(255,255,255,.16);background:#0A0A0B;color:#F4F4F1";
 }
 
+// [ key, url-slug, title, subtitle, search-keywords ]
+// The slug (2nd field) is the public URL: /work/<slug>. Keep it lowercase,
+// hyphenated and stable — changing it breaks any outreach link already sent.
 const DEMO_META = [
-  ["summit", "", "Summit Plumbing Co.", "Plumbing · Chicago"],
-  ["ironpeak", "", "Iron Peak Roofing", "Roofing · Naperville"],
-  ["clearair", "", "Clear Air Heating & Cooling", "HVAC · Aurora"],
-  ["verdant", "", "Verdant Landscaping", "Landscaping · Evanston"],
-  ["brightline", "", "Bright Line Electric", "Electrical · Chicago"],
-  ["coppercoat", "", "Copper & Coat Painting", "Painting · Oak Park"],
-  ["ironline", "", "Ironline Concrete & Masonry", "Concrete · Chicago"],
-  ["overhead", "", "Overhead Garage Door Co.", "Garage doors · Skokie"],
-  ["clearview", "", "Clearview Window & Siding", "Windows & siding · Naperville"],
-  ["bramble", "", "Bramble & Bone", "Dog grooming · Chicago"],
+  ["summit", "summit-plumbing", "Summit Plumbing Co.", "Plumbing · Chicago", "plumbing plumber plumbers pipe drain water heater leak sewer"],
+  ["ironpeak", "iron-peak-roofing", "Iron Peak Roofing", "Roofing · Naperville", "roofing roofer roof shingle gutter storm leak"],
+  ["clearair", "clear-air-hvac", "Clear Air Heating & Cooling", "HVAC · Aurora", "hvac heating cooling air conditioning ac furnace heat pump"],
+  ["verdant", "verdant-landscaping", "Verdant Landscaping", "Landscaping · Evanston", "landscaping landscaper lawn garden yard hardscape mowing"],
+  ["brightline", "bright-line-electric", "Bright Line Electric", "Electrical · Chicago", "electric electrical electrician wiring panel ev charger lighting"],
+  ["coppercoat", "copper-coat-painting", "Copper & Coat Painting", "Painting · Oak Park", "painting painter paint drywall interior exterior"],
+  ["ironline", "ironline-concrete", "Ironline Concrete & Masonry", "Concrete · Chicago", "concrete masonry mason driveway patio foundation brick paver"],
+  ["overhead", "overhead-garage-doors", "Overhead Garage Door Co.", "Garage doors · Skokie", "garage door opener spring track door repair"],
+  ["clearview", "clearview-windows-siding", "Clearview Window & Siding", "Windows & siding · Naperville", "window windows siding replacement glass exterior"],
+  ["bramble", "bramble-bone-grooming", "Bramble & Bone", "Dog grooming · Chicago", "dog grooming groomer pet grooming puppy cat"],
 ];
 
 const GHL_WEBHOOK_URL = "";
 
 class Component extends DCLogic {
   state = {
-    demos: null, posts: null, modal: null, postKey: null, demoKey: null, errName: false, errEmail: false,
+    demos: null, posts: null, modal: null, postKey: null, demoKey: null, errName: false, errEmail: false, errConsent: false, bookConsent: false, demoQuery: "",
     wide: true, menuOpen: false, tradesOpen: false, productsOpen: false, mobProd: false, productKey: "site", page: "home",
     loading: true, pct: "00",
     calM: new Date().getMonth(), calY: new Date().getFullYear(),
@@ -3173,8 +3192,17 @@ class Component extends DCLogic {
       if (this.progress) this.progress.style.width = (m > 0 ? (h.scrollTop / m) * 100 : 0) + "%";
     };
     window.addEventListener("scroll", this.onScroll, { passive: true });
-    this.onKey = e => { if (e.key === "Escape") this.setState({ modal: null }); };
+    this.onKey = e => { if (e.key === "Escape") this.dismiss(); };
     window.addEventListener("keydown", this.onKey);
+    // URL routing: restore a deep link parked by 404.html, sync back/forward,
+    // then apply whatever path we actually loaded on.
+    try {
+      const parked = sessionStorage.getItem("aiconic:path");
+      if (parked) { sessionStorage.removeItem("aiconic:path"); history.replaceState({}, "", parked); }
+    } catch (e) {}
+    this.onPop = () => this.applyPath(location.pathname);
+    window.addEventListener("popstate", this.onPop);
+    this.applyPath(location.pathname, true);
     this.onResize = () => {
       const wide = window.innerWidth >= 1030;
       if (wide !== this.state.wide) this.setState({ wide: wide, menuOpen: wide ? false : this.state.menuOpen });
@@ -3355,6 +3383,7 @@ class Component extends DCLogic {
     window.removeEventListener("scroll", this.onScroll);
     window.removeEventListener("keydown", this.onKey);
     window.removeEventListener("resize", this.onResize);
+    if (this.onPop) window.removeEventListener("popstate", this.onPop);
     if (this.raf) cancelAnimationFrame(this.raf);
     if (this.fieldRaf) cancelAnimationFrame(this.fieldRaf);
     if (this.io) this.io.disconnect();
@@ -3433,14 +3462,127 @@ class Component extends DCLogic {
 
   go(id) {
     const page = id === "top" ? "home" : id;
-    this.setState({ page: page, menuOpen: false, tradesOpen: false, productsOpen: false });
+    this.setState({ page: page, menuOpen: false, tradesOpen: false, productsOpen: false }, () => this.syncURL());
     window.scrollTo({ top: 0, behavior: "instant" });
   }
 
   goLegal(doc) {
-    this.setState({ page: "legal", legalDoc: doc, menuOpen: false, tradesOpen: false, productsOpen: false });
+    this.setState({ page: "legal", legalDoc: doc, menuOpen: false, tradesOpen: false, productsOpen: false }, () => this.syncURL());
     window.scrollTo({ top: 0, behavior: "instant" });
-    window.scrollTo({ top: 0, behavior: "instant" });
+  }
+
+  // ---- URL routing (added) ---------------------------------------------------
+  // Gives every page, demo and blog post its own real URL so links can be shared
+  // in outreach and crawled by search engines, without rebuilding the SPA. The
+  // logical location is derived from state; navigation pushes it, the browser's
+  // back/forward and deep links read it back. On static hosts (GitHub Pages) a
+  // 404.html restores the deep link before the app boots; on Netlify the
+  // catch-all redirect already serves index.html for every path.
+  pathFromState(s) {
+    s = s || this.state;
+    if (s.modal === "demo" && s.demoKey) {
+      const d = DEMO_META.find(x => x[0] === s.demoKey);
+      if (d && d[1]) return "/work/" + d[1];
+    }
+    if (s.modal === "post" && s.postKey) return "/blog/" + s.postKey;
+    if (s.page === "legal") return "/legal/" + (s.legalDoc || "terms");
+    if (s.page === "product") return "/services/" + (s.productKey || "site");
+    if (!s.page || s.page === "home") return "/";
+    return "/" + s.page;
+  }
+
+  stateFromPath(pathname) {
+    const parts = (pathname || "/").replace(/^\/+|\/+$/g, "").split("/").filter(Boolean);
+    if (!parts.length) return { page: "home", modal: null };
+    const seg = decodeURIComponent(parts[0]).toLowerCase();
+    const sub = parts[1] ? decodeURIComponent(parts[1]).toLowerCase() : "";
+    if (seg === "work" && sub) {
+      const d = DEMO_META.find(x => x[1] === sub);
+      if (d) return { page: "work", modal: "demo", demoKey: d[0] };
+      return { page: "work", modal: null };
+    }
+    if (seg === "blog" && sub) return { page: "blog", modal: "post", postKey: sub };
+    if (seg === "legal") return { page: "legal", legalDoc: sub || "terms", modal: null };
+    if (seg === "services" && sub) return { page: "product", productKey: sub, modal: null };
+    const PAGES = ["systems", "work", "process", "pricing", "about", "blog", "faq", "contact"];
+    if (PAGES.indexOf(seg) >= 0) return { page: seg, modal: null };
+    return { page: "home", modal: null };
+  }
+
+  metaFromState(s) {
+    s = s || this.state;
+    const base = "AICONIC";
+    const defDesc = "Done-for-you websites, booking, follow-up and reviews for contractors and small businesses. You run the business. We make sure the phone keeps ringing and no lead slips through.";
+    if (s.modal === "demo" && s.demoKey) {
+      const d = DEMO_META.find(x => x[0] === s.demoKey);
+      if (d) return { title: d[2] + " — contractor website demo | " + base, desc: "A live, booking-ready website demo AICONIC built for a " + d[3].split(" · ")[0].toLowerCase() + " business. See what your site could look like." };
+    }
+    if (s.modal === "post" && s.postKey) {
+      const p = s.posts && s.posts[s.postKey];
+      if (p) return { title: p.title + " | " + base, desc: p.title };
+    }
+    const T = {
+      home: "AICONIC | Website Design & Marketing Systems for Contractors",
+      systems: "Systems — websites, missed-call text back, reviews & follow-up | " + base,
+      work: "Our work — contractor website demos | " + base,
+      process: "How it works — live in 7–10 days | " + base,
+      pricing: "Pricing — straight numbers, month to month | " + base,
+      about: "About — a one-person studio in Chicago | " + base,
+      blog: "Blog — straight talk on getting more jobs | " + base,
+      faq: "FAQ | " + base,
+      contact: "Contact — tell us about your business | " + base
+    };
+    if (s.page === "legal") { const n = { terms: "Terms of service", privacy: "Privacy notice", cookies: "Cookie notice", disclaimer: "Disclaimer & accessibility" }; return { title: (n[s.legalDoc || "terms"] || "Legal") + " | " + base, desc: defDesc }; }
+    if (s.page === "product") { const p = this.productData()[s.productKey]; return { title: (p ? p.title : "Services") + " | " + base, desc: p && p.lede ? p.lede : defDesc }; }
+    return { title: T[s.page] || T.home, desc: defDesc };
+  }
+
+  applyMeta() {
+    try {
+      const m = this.metaFromState(this.state);
+      if (m.title) document.title = m.title;
+      const d = document.querySelector('meta[name="description"]');
+      if (d && m.desc) d.setAttribute("content", m.desc);
+      let c = document.querySelector('link[rel="canonical"]');
+      if (c) c.setAttribute("href", "https://getaiconic.com" + this.pathFromState(this.state));
+    } catch (e) {}
+  }
+
+  syncURL(replace) {
+    try {
+      const path = this.pathFromState(this.state);
+      if (path !== location.pathname) history[replace ? "replaceState" : "pushState"]({}, "", path);
+      this._lastPath = path;
+    } catch (e) {}
+    this.applyMeta();
+  }
+
+  applyPath(pathname, initial) {
+    const patch = this.stateFromPath(pathname);
+    this._lastPath = this.pathFromState(Object.assign({}, this.state, patch));
+    this.setState(patch, () => this.applyMeta());
+    if (!initial) window.scrollTo({ top: 0, behavior: "instant" });
+  }
+
+  dismiss() {
+    this.setState({ modal: null }, () => this.syncURL(true));
+  }
+
+  // Search the demo builds by trade / keyword and open the closest match.
+  runDemoSearch(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    const q = (this.state.demoQuery || "").toLowerCase().trim();
+    if (!q) return;
+    const words = q.split(/[^a-z0-9]+/).filter(Boolean);
+    let best = null, bestScore = 0;
+    DEMO_META.forEach(d => {
+      const hay = (d[2] + " " + d[3] + " " + (d[4] || "")).toLowerCase();
+      let score = 0;
+      words.forEach(w => { if (hay.indexOf(w) >= 0) score += w.length; });
+      if (score > bestScore) { bestScore = score; best = d; }
+    });
+    if (best) { this.setState({ demoQuery: "" }); this.open("demo", { demoKey: best[0] }); }
+    else this.setState({ demoNoMatch: true });
   }
 
   buildCalendar() {
@@ -3490,28 +3632,42 @@ class Component extends DCLogic {
     if (!s.bookName.trim()) return this.setState({ bookError: "Add your name." });
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.bookEmail.trim())) return this.setState({ bookError: "Add a valid email." });
     if (!s.bookTrade) return this.setState({ bookError: "Tell us what you do." });
+    if (!s.bookConsent) return this.setState({ bookError: "Please tick the box so we can call or text you about the booking." });
     const when = this.pickedDateLabel() + " at " + s.pickedSlot + " CT";
-    const payload = { name: s.bookName.trim(), email: s.bookEmail.trim(), trade: s.bookTrade, when: when, source: "aiconic-booking" };
+    const payload = {
+      name: s.bookName.trim(), email: s.bookEmail.trim(), trade: s.bookTrade, when: when, source: "aiconic-booking",
+      sms_consent: true,
+      consent_text: "I agree to receive calls and texts from AICONIC about this booking. Message and data rates may apply. Reply STOP to opt out. Consent is not a condition of purchase.",
+      consent_timestamp: new Date().toISOString()
+    };
     const done = () => this.setState({
       modal: "booked", bookedWhen: when, bookedEmail: s.bookEmail.trim(),
-      pickedDay: null, pickedSlot: null, bookName: "", bookEmail: "", bookTrade: "", bookError: ""
+      pickedDay: null, pickedSlot: null, bookName: "", bookEmail: "", bookTrade: "", bookConsent: false, bookError: ""
     });
     if (BOOKING_WEBHOOK_URL) {
       fetch(BOOKING_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }).then(done).catch(done);
     } else done();
   }
 
-  open(modal, extra) { this.setState(Object.assign({ modal: modal }, extra || {})); }
+  open(modal, extra) { this.setState(Object.assign({ modal: modal }, extra || {}), () => this.syncURL()); }
 
   submit(e) {
     e.preventDefault();
     const f = e.target;
     const name = f.name.value.trim(), email = f.email.value.trim();
     const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    this.setState({ errName: !name, errEmail: !okEmail });
-    if (!name || !okEmail) return;
-    const payload = { name: name, email: email, phone: f.phone.value.trim(), trade: f.trade.value, message: f.message.value.trim(), source: "aiconic-website" };
-    const done = () => { f.reset(); this.setState({ modal: "success", errName: false, errEmail: false }); };
+    const consent = !!(f.consent && f.consent.checked);
+    this.setState({ errName: !name, errEmail: !okEmail, errConsent: !consent });
+    if (!name || !okEmail || !consent) return;
+    // TCPA: record that consent was captured, with the exact wording shown and a timestamp.
+    const payload = {
+      name: name, email: email, phone: f.phone.value.trim(), trade: f.trade.value, message: f.message.value.trim(),
+      source: "aiconic-website",
+      sms_consent: true,
+      consent_text: "I agree to receive texts from AICONIC about my enquiry. Message and data rates may apply. Message frequency varies. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase.",
+      consent_timestamp: new Date().toISOString()
+    };
+    const done = () => { f.reset(); this.setState({ modal: "success", errName: false, errEmail: false, errConsent: false }); };
     if (GHL_WEBHOOK_URL) {
       fetch(GHL_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }).then(done).catch(done);
     } else done();
@@ -3564,6 +3720,9 @@ class Component extends DCLogic {
       tradesOpen: s.tradesOpen,
       tradesToggleLabel: s.tradesOpen ? "Hide the work ↑" : "See the work we do →",
       toggleTrades: () => this.setState({ tradesOpen: !s.tradesOpen }),
+      demoQuery: s.demoQuery, demoNoMatch: !!s.demoNoMatch,
+      setDemoQuery: e => this.setState({ demoQuery: e.target.value, demoNoMatch: false }),
+      runDemoSearch: e => this.runDemoSearch(e),
       demoCards: DEMO_META.map(d => ({
         key: d[0], url: d[1], title: d[2], sub: d[3],
         src: live && s.demos ? s.demos[d[0]] : "",
@@ -3594,10 +3753,11 @@ class Component extends DCLogic {
       revLabel: (s.revIdx + 1) + " / " + REVIEWS.length,
       prevReview: () => this.setState({ revIdx: (this.state.revIdx - 1 + REVIEWS.length) % REVIEWS.length }),
       nextReview: () => this.setState({ revIdx: (this.state.revIdx + 1) % REVIEWS.length }),
-      bookName: s.bookName, bookEmail: s.bookEmail, bookTrade: s.bookTrade,
+      bookName: s.bookName, bookEmail: s.bookEmail, bookTrade: s.bookTrade, bookConsent: s.bookConsent,
       setBookName: e => this.setState({ bookName: e.target.value }),
       setBookEmail: e => this.setState({ bookEmail: e.target.value }),
       setBookTrade: e => this.setState({ bookTrade: e.target.value, bookError: "" }),
+      setBookConsent: e => this.setState({ bookConsent: e.target.checked, bookError: "" }),
       tradeOptions: [{ value: "", label: "What do you do?" }].concat(TRADES.map(t => ({ value: t[0], label: t[0] }))).concat([{ value: "Other", label: "Something else" }]),
       bookSummary: s.pickedDay && s.pickedSlot ? this.pickedDateLabel() + " · " + s.pickedSlot + " CT · 20 min" : "No time selected yet",
       bookError: s.bookError,
@@ -3609,7 +3769,7 @@ class Component extends DCLogic {
       postImg: post ? post.img : "", postCat: post ? post.cat : "", postTitle: post ? post.title : "",
       postMeta: post ? post.date + " · " + post.read + " min read" : "",
       demoSrc: demo || "", demoTitle: dm ? dm[2] : "", demoSub: dm ? dm[3] : "",
-      errName: s.errName, errEmail: s.errEmail,
+      errName: s.errName, errEmail: s.errEmail, errConsent: s.errConsent,
       loading: s.loading, pct: s.pct,
       preRef: el => { this.pre = el; },
       glRef: el => { if (el && el !== this.gl) { this.gl = el; setTimeout(() => this.initField(), 80); } },
@@ -3662,11 +3822,11 @@ class Component extends DCLogic {
       prod: this.productData()[s.productKey] || this.productData().site,
       products: Object.values(this.productData()).map(p => Object.assign({}, p, {
         active: s.page === "product" && s.productKey === p.key ? "#F4F4F1" : "#9EA0A8",
-        open: e => { if (e && e.stopPropagation) e.stopPropagation(); this.setState({ productsOpen: false, menuOpen: false, page: "product", productKey: p.key }); window.scrollTo({ top: 0, behavior: "instant" }); }
+        open: e => { if (e && e.stopPropagation) e.stopPropagation(); this.setState({ productsOpen: false, menuOpen: false, page: "product", productKey: p.key }, () => this.syncURL()); window.scrollTo({ top: 0, behavior: "instant" }); }
       })),
       openBook: () => this.open("book"),
-      closeModal: () => this.setState({ modal: null }),
-      backdrop: e => { if (e.target === e.currentTarget) this.setState({ modal: null }); },
+      closeModal: () => this.dismiss(),
+      backdrop: e => { if (e.target === e.currentTarget) this.dismiss(); },
       toContact: () => { this.setState({ modal: null }); setTimeout(() => this.go("contact"), 60); },
       submit: e => this.submit(e)
     };
