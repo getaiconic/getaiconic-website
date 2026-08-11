@@ -1,0 +1,26 @@
+{
+  "skill_name": "design-director",
+  "evals": [
+    {
+      "id": 0,
+      "name": "extract-system",
+      "prompt": "I love linear.app, stripe.com, and vercel.com. Pull what they share and build me a design system with tokens.",
+      "expected_output": "A reference analysis per site, a synthesized design-system.md, a valid tokens.json (color/type/space/radius/shadow), and a generated tokens.css. Decisions traced to references.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "produce-hero",
+      "prompt": "Using this design system (tokens.json attached), design a landing-page hero in HTML/CSS for a dev tool called Iconic. Save it as hero.html.",
+      "expected_output": "A single hero.html that applies the provided tokens via CSS custom properties (no hardcoded hexes in component rules), with clear type hierarchy and on-scale spacing.",
+      "files": ["tokens.json"]
+    },
+    {
+      "id": 2,
+      "name": "make-premium",
+      "prompt": "Here's a plain hero (plain-hero.html attached). Make it feel more premium. Save the result as premium-hero.html.",
+      "expected_output": "A revised premium-hero.html plus a short explanation of the token-level moves made (more whitespace, tighter tracking, fewer/quieter colors, one confident shadow, subtler motion).",
+      "files": ["plain-hero.html"]
+    }
+  ]
+}
