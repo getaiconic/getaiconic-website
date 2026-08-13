@@ -75,14 +75,14 @@ body { overflow-wrap: break-word; }
    back to a fixed 4:5 portrait.
    -------------------------------------------------------------------------- */
 @media (max-width: 999px) {
-  [data-rev-uniform]:has(img[alt="Founder of AICONIC"]) {
+  [data-rev-uniform]:has(img[alt="AICONIC founder Annemarie"]) {
     grid-template-columns: 1fr !important;
   }
-  img[alt="Founder of AICONIC"] {
+  img[alt="AICONIC founder Annemarie"] {
     height: auto !important;
     aspect-ratio: 4 / 5 !important;
   }
-  div:has(> img[alt="Founder of AICONIC"]) {
+  div:has(> img[alt="AICONIC founder Annemarie"]) {
     flex: 0 0 auto !important;
     min-height: 0 !important;
   }
