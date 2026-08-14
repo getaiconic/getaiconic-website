@@ -1,0 +1,61 @@
+{
+  "category": "kinetic-type",
+  "duration_s": 10,
+  "fps": 30,
+  "canvas": { "w": 1920, "h": 1080, "aspect": "16:9" },
+  "style": "premium dark studio; near-black stage, off-white heavy grotesque display type, single blue accent + coral danger accent; motion-first explainer arc problem -> system -> promise -> brand. Confident, fast, clean.",
+  "palette": ["#0A0A0B", "#F4F4F1", "#9EA0A8", "#2E6DF2", "#F2825B", "#0E8C74"],
+  "font": "Bricolage Grotesque / DM Mono",
+  "beats": [0.9, 3.9, 6.2, 8.2],
+  "export": "mp4",
+  "asset_needs": [],
+  "content": {
+    "scenes": [
+      {
+        "id": "s1-problem",
+        "start": 0.0,
+        "end": 2.4,
+        "kicker": "THE PROBLEM",
+        "text": "A missed call is a lost job.",
+        "emphasis_words": ["missed call", "lost"],
+        "emotion": "urgent",
+        "motion": "fade_blur lines rise; 'lost' strike + coral color_shift on beat",
+        "beats": [0.9]
+      },
+      {
+        "id": "s2-system",
+        "start": 2.4,
+        "end": 5.0,
+        "kicker": "THE SYSTEM",
+        "text": "Websites. Booking. Follow-up. Reviews.",
+        "emphasis_words": [],
+        "emotion": "confident build",
+        "motion": "four lines slam in from left, staggered, accent bullets; underline sweep down the stack",
+        "beats": [3.9]
+      },
+      {
+        "id": "s3-promise",
+        "start": 5.0,
+        "end": 7.3,
+        "kicker": "THE PROMISE",
+        "text": "Done for you. Live in 7 days.",
+        "emphasis_words": ["7 days"],
+        "emotion": "reassuring impact",
+        "motion": "'Done for you.' fades; '7 days' scale_punch + accent glow, underline sweep",
+        "beats": [6.2]
+      },
+      {
+        "id": "s4-brand",
+        "start": 7.3,
+        "end": 10.0,
+        "kicker": "STUDIO. SYSTEMS. SCALE.",
+        "text": "AICONIC",
+        "emphasis_words": ["AICONIC"],
+        "emotion": "premium resolve",
+        "motion": "wordmark blur+scale in, accent underline sweep, eyebrow letter-reveal, getaiconic.com pill rises",
+        "beats": [8.2]
+      }
+    ],
+    "url": "getaiconic.com"
+  }
+}

@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <!-- Local @font-face (vendored woff2) — deterministic, offline, no network on navigation. -->
+    <script src="./assets/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Bricolage Grotesque";
+        font-style: normal;
+        font-weight: 600;
+        font-display: block;
+        src: url("./assets/fonts/bricolage-600.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Bricolage Grotesque";
+        font-style: normal;
+        font-weight: 700;
+        font-display: block;
+        src: url("./assets/fonts/bricolage-700.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Bricolage Grotesque";
+        font-style: normal;
+        font-weight: 800;
+        font-display: block;
+        src: url("./assets/fonts/bricolage-800.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "DM Mono";
+        font-style: normal;
+        font-weight: 500;
+        font-display: block;
+        src: url("./assets/fonts/dm-mono-500.woff2") format("woff2");
+      }
+      :root {
+        --bg: #0a0a0b;
+        --ink: #f4f4f1;
+        --muted: #9ea0a8;
+        --line: #26262b;
+        --accent: #2e6df2;
+        --danger: #f2825b;
+        --green: #0e8c74;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--bg);
+      }
+      body {
+        font-family: "Bricolage Grotesque", sans-serif;
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        background: var(--bg);
+        overflow: hidden;
+      }
+
+      /* ---- ambient backdrop ---- */
+      .bg-glow {
+        position: absolute;
+        width: 1500px;
+        height: 1500px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at center,
+          rgba(46, 109, 242, 0.16),
+          rgba(46, 109, 242, 0) 62%
+        );
+        filter: blur(10px);
+        will-change: opacity, transform;
+      }
+      .bg-vignette {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          130% 130% at 50% 42%,
+          rgba(0, 0, 0, 0) 55%,
+          rgba(0, 0, 0, 0.55) 100%
+        );
+        pointer-events: none;
+      }
+      .grain {
+        position: absolute;
+        inset: -50%;
+        opacity: 0.045;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        pointer-events: none;
+        mix-blend-mode: screen;
+      }
+
+      /* ---- scene scaffold (stacked full-bleed layers) ---- */
+      .scene {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 110px 180px;
+        gap: 28px;
+        opacity: 0;
+        will-change: opacity, transform, filter;
+      }
+
+      .kicker {
+        font-family: "DM Mono", monospace;
+        font-weight: 500;
+        font-size: 26px;
+        letter-spacing: 0.42em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .kicker .dot {
+        color: var(--accent);
+      }
+
+      .headline {
+        font-weight: 800;
+        line-height: 0.98;
+        letter-spacing: -0.02em;
+        text-align: center;
+      }
+
+      /* scene 1 */
+      .s1 .headline {
+        font-size: 148px;
+        max-width: 1400px;
+      }
+      .s1 .lost {
+        position: relative;
+        color: var(--danger);
+        display: inline-block;
+      }
+      .s1 .strike {
+        position: absolute;
+        left: -4px;
+        right: -4px;
+        top: 54%;
+        height: 10px;
+        background: var(--danger);
+        border-radius: 6px;
+        transform: scaleX(0);
+        transform-origin: left center;
+      }
+
+      /* scene 2 — the four pillars */
+      .s2 .stack {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+      .s2 .pillar {
+        display: flex;
+        align-items: center;
+        gap: 34px;
+        font-weight: 800;
+        font-size: 118px;
+        line-height: 1.02;
+        letter-spacing: -0.02em;
+      }
+      .s2 .bullet {
+        width: 26px;
+        height: 26px;
+        border-radius: 6px;
+        background: var(--accent);
+        flex: 0 0 auto;
+        transform: scale(0);
+      }
+      .s2 .p2 .bullet {
+        background: var(--green);
+      }
+      .s2 .p3 .bullet {
+        background: var(--danger);
+      }
+      .s2 .p4 .bullet {
+        background: var(--ink);
+      }
+
+      /* scene 3 — the promise */
+      .s3 .line1 {
+        font-weight: 700;
+        font-size: 104px;
+        letter-spacing: -0.01em;
+        color: var(--ink);
+      }
+      .s3 .line2 {
+        font-weight: 800;
+        font-size: 132px;
+        letter-spacing: -0.02em;
+        text-align: center;
+      }
+      .s3 .days {
+        position: relative;
+        color: var(--accent);
+        display: inline-block;
+      }
+      .s3 .uline {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -14px;
+        height: 10px;
+        border-radius: 6px;
+        background: var(--accent);
+        transform: scaleX(0);
+        transform-origin: left center;
+      }
+
+      /* scene 4 — brand lockup */
+      .s4 .wordmark {
+        font-weight: 800;
+        font-size: 210px;
+        letter-spacing: 0.02em;
+        line-height: 1;
+      }
+      .s4 .wm-underline {
+        width: 0;
+        height: 8px;
+        border-radius: 6px;
+        background: var(--accent);
+        margin-top: 10px;
+      }
+      .s4 .eyebrow {
+        font-family: "DM Mono", monospace;
+        font-weight: 500;
+        font-size: 28px;
+        letter-spacing: 0.42em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-top: 6px;
+      }
+      .s4 .urlpill {
+        margin-top: 34px;
+        font-family: "DM Mono", monospace;
+        font-weight: 500;
+        font-size: 34px;
+        letter-spacing: 0.04em;
+        color: var(--ink);
+        border: 2px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+        padding: 18px 40px;
+        border-radius: 999px;
+      }
+      .s4 .urlpill b {
+        color: var(--accent);
+        font-weight: 500;
+      }
+
+      /* progress rail */
+      .rail {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 5px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.06);
+      }
+      .rail .fill {
+        height: 100%;
+        width: 100%;
+        background: var(--accent);
+        transform: scaleX(0);
+        transform-origin: left center;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="10"
+      data-fps="30"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div id="stage" class="clip" data-start="0" data-duration="10" data-track-index="0" style="position:absolute; inset:0;">
+        <!-- ambient -->
+        <div class="bg-glow" id="bgGlow"></div>
+        <div class="grain"></div>
+
+        <!-- SCENE 1 — problem -->
+        <section class="scene s1" id="s1">
+          <div class="kicker" id="s1k">THE&nbsp;<span class="dot">·</span>&nbsp;PROBLEM</div>
+          <h1 class="headline">
+            <span class="l l1">A missed call</span><br />
+            <span class="l l2">is a <span class="lost">lost<span class="strike" id="s1strike"></span></span> job.</span>
+          </h1>
+        </section>
+
+        <!-- SCENE 2 — the system -->
+        <section class="scene s2" id="s2">
+          <div class="kicker" id="s2k">THE&nbsp;<span class="dot">·</span>&nbsp;SYSTEM</div>
+          <div class="stack">
+            <div class="pillar p1"><span class="bullet"></span><span class="w">Websites</span></div>
+            <div class="pillar p2"><span class="bullet"></span><span class="w">Booking</span></div>
+            <div class="pillar p3"><span class="bullet"></span><span class="w">Follow-up</span></div>
+            <div class="pillar p4"><span class="bullet"></span><span class="w">Reviews</span></div>
+          </div>
+        </section>
+
+        <!-- SCENE 3 — the promise -->
+        <section class="scene s3" id="s3">
+          <div class="kicker" id="s3k">THE&nbsp;<span class="dot">·</span>&nbsp;PROMISE</div>
+          <div class="line1" id="s3l1">Done for you.</div>
+          <div class="line2">Live in <span class="days">7 days<span class="uline" id="s3uline"></span></span>.</div>
+        </section>
+
+        <!-- SCENE 4 — brand -->
+        <section class="scene s4" id="s4">
+          <div class="wordmark" id="wm">AICONIC</div>
+          <div class="wm-underline" id="wmUnderline"></div>
+          <div class="eyebrow" id="eyebrow">Studio. Systems. Scale.</div>
+          <div class="urlpill" id="urlpill">get<b>aiconic</b>.com</div>
+        </section>
+
+        <!-- global chrome -->
+        <div class="bg-vignette"></div>
+        <div class="rail"><div class="fill" id="railFill"></div></div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+
+      // ---------- ambient (whole piece) ----------
+      gsap.set("#bgGlow", { opacity: 0.9, scale: 1 });
+      tl.fromTo("#bgGlow", { scale: 0.92 }, { scale: 1.08, duration: 10, ease: "sine.inOut" }, 0);
+      tl.fromTo("#railFill", { scaleX: 0 }, { scaleX: 1, duration: 10, ease: "none" }, 0);
+
+      // ================= SCENE 1 : 0.0 – 2.4 =================
+      tl.fromTo("#s1", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.25 }, 0.0);
+      tl.fromTo("#s1k", { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.5 }, 0.05);
+      tl.fromTo(
+        "#s1 .l1",
+        { autoAlpha: 0, y: 60, filter: "blur(16px)" },
+        { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.6, ease: "power4.out" },
+        0.2
+      );
+      tl.fromTo(
+        "#s1 .l2",
+        { autoAlpha: 0, y: 60, filter: "blur(16px)" },
+        { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.6, ease: "power4.out" },
+        0.42
+      );
+      // beat ~0.9s : strike through "lost" + coral pulse
+      tl.fromTo("#s1strike", { scaleX: 0 }, { scaleX: 1, duration: 0.32, ease: "power2.inOut" }, 0.9);
+      tl.fromTo(
+        "#s1 .lost",
+        { scale: 1 },
+        { scale: 1.08, duration: 0.16, yoyo: true, repeat: 1, ease: "sine.inOut" },
+        0.9
+      );
+      // exit
+      tl.to("#s1", { autoAlpha: 0, y: -34, filter: "blur(10px)", duration: 0.32, ease: "power2.in" }, 2.12);
+
+      // ================= SCENE 2 : 2.4 – 5.0 =================
+      tl.fromTo("#s2", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.25 }, 2.4);
+      tl.fromTo("#s2k", { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.45 }, 2.42);
+      const pillars = ["#s2 .p1", "#s2 .p2", "#s2 .p3", "#s2 .p4"];
+      pillars.forEach((p, i) => {
+        const t = 2.62 + i * 0.26;
+        tl.fromTo(
+          p + " .w",
+          { autoAlpha: 0, x: -90 },
+          { autoAlpha: 1, x: 0, duration: 0.5, ease: "power4.out" },
+          t
+        );
+        tl.fromTo(
+          p + " .bullet",
+          { scale: 0 },
+          { scale: 1, duration: 0.34, ease: "back.out(3)" },
+          t + 0.06
+        );
+      });
+      // beat ~3.9s : whole stack breathe
+      tl.fromTo(
+        "#s2 .stack",
+        { scale: 1 },
+        { scale: 1.03, duration: 0.22, yoyo: true, repeat: 1, ease: "sine.inOut" },
+        3.9
+      );
+      // exit
+      tl.to("#s2", { autoAlpha: 0, y: -34, filter: "blur(10px)", duration: 0.32, ease: "power2.in" }, 4.72);
+
+      // ================= SCENE 3 : 5.0 – 7.3 =================
+      tl.fromTo("#s3", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.25 }, 5.0);
+      tl.fromTo("#s3k", { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.45 }, 5.02);
+      tl.fromTo(
+        "#s3l1",
+        { autoAlpha: 0, y: 44, filter: "blur(12px)" },
+        { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "power3.out" },
+        5.15
+      );
+      tl.fromTo(
+        "#s3 .line2",
+        { autoAlpha: 0, scale: 0.7 },
+        { autoAlpha: 1, scale: 1, duration: 0.6, ease: "back.out(1.8)" },
+        5.55
+      );
+      // beat ~6.2s : accent underline sweep + glow on "7 days"
+      tl.fromTo("#s3uline", { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power2.inOut" }, 6.2);
+      tl.fromTo(
+        "#s3 .days",
+        { textShadow: "0 0 0px rgba(46,109,242,0)" },
+        { textShadow: "0 0 44px rgba(46,109,242,0.65)", duration: 0.3, yoyo: true, repeat: 1, ease: "sine.inOut" },
+        6.2
+      );
+      // exit
+      tl.to("#s3", { autoAlpha: 0, y: -30, filter: "blur(10px)", duration: 0.34, ease: "power2.in" }, 7.0);
+
+      // ================= SCENE 4 : 7.3 – 10.0 (brand hold) =================
+      tl.fromTo("#s4", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3 }, 7.3);
+      tl.fromTo(
+        "#wm",
+        { autoAlpha: 0, scale: 1.18, filter: "blur(22px)" },
+        { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 0.7, ease: "power3.out" },
+        7.35
+      );
+      tl.fromTo("#wmUnderline", { width: 0 }, { width: 560, duration: 0.5, ease: "power2.inOut" }, 7.95);
+      tl.fromTo("#eyebrow", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.55, ease: "power2.out" }, 8.05);
+      tl.fromTo("#urlpill", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: "back.out(1.6)" }, 8.35);
+      // beat ~8.2 accent bloom on glow
+      tl.fromTo("#bgGlow", { opacity: 0.9 }, { opacity: 1.15, duration: 0.4, yoyo: true, repeat: 1, ease: "sine.inOut" }, 8.2);
+      // gentle final breath hold to 10s
+      tl.to("#s4 .wordmark", { scale: 1.012, duration: 1.2, ease: "sine.inOut" }, 8.7);
+
+      tl.seek(0);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
