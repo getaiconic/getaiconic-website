@@ -30,6 +30,10 @@ const ROUTES = [
   { path: '/blog',         page: 'blog',    title: 'Blog | Marketing for Contractors | AICONIC', desc: 'Plain-English articles on getting more booked jobs: missed calls, Google reviews, speed to lead, database reactivation and what a contractor website should cost.' },
   { path: '/contact',      page: 'contact', title: 'Contact AICONIC | Book a 20-Minute Call', desc: 'Tell us about your business and we will book your strategy call. One inbox, one person, no jargon. Based in Chicago, serving contractors and small local businesses.' },
   { path: '/legal',        page: 'legal',   title: 'Legal: Terms, Privacy, Cookies | AICONIC', desc: 'Terms of service, privacy notice, cookie notice and disclaimer for AICONIC, a Chicago studio building marketing systems for contractors and small local businesses.' },
+  { path: '/privacy',      page: 'legal',   title: 'Privacy Policy | AICONIC', desc: 'How AICONIC collects, uses, protects and lets you control your personal information. We do not sell your data. Contact hello@getaiconic.com to access, correct or delete it.' },
+  { path: '/terms',        page: 'legal',   title: 'Terms of Service | AICONIC', desc: 'The terms that govern the marketing and communication systems AICONIC builds and operates for contractors and small local businesses. Read them before you rely on the service.' },
+  { path: '/cookies',      page: 'legal',   title: 'Cookie Notice | AICONIC', desc: 'How AICONIC uses cookies and similar technologies on getaiconic.com, what they do, and how you can control them.' },
+  { path: '/disclaimer',   page: 'legal',   title: 'Disclaimer | AICONIC', desc: 'Figures, demo sites and case studies shown by AICONIC are illustrative. Results vary and are not guaranteed. Nothing here is legal, tax or professional advice.' },
 ];
 
 // ---- tiny static server with SPA fallback (serve file if it exists, else index.html) ----
