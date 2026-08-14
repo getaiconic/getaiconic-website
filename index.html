@@ -1473,7 +1473,7 @@ body.om-loading{overflow:hidden}
   <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(ellipse 46% 54% at 50% 44%,rgba(255,255,255,.12),transparent 66%),linear-gradient(0deg,#0A0A0B,transparent 48%)"></div>
   <div style="position:relative;z-index:2;max-width:1160px;margin:0 auto;padding:150px 24px 118px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:0">
     <h1 style="font-size:clamp(42px,6.8vw,86px);line-height:.97;font-weight:700;letter-spacing:-.04em;margin:22px 0 0;max-width:min(100%,16ch)">Never lose another <em style="font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;color:var(--acc,#E8E8E6)">lead.</em></h1>
-    <p style="font-size:16px;color:#F4F4F1;max-width:min(100%,60ch);margin:24px 0 0;line-height:1.55;text-transform:uppercase;letter-spacing:.02em">We build and run the system that answers every call, follows up every lead, and books the job. You stay on the tools. Live in 7 to 10 days.</p>
+    <p style="font-size:17px;color:#F4F4F1;max-width:min(100%,60ch);margin:24px 0 0;line-height:1.6">We build and run the system that answers every call, follows up every lead, and books the job. You stay on the tools. Live in 7 to 10 days.</p>
     <div style="display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;justify-content:center">
       <button style="display:inline-flex;align-items:center;gap:10px;font-family:inherit;font-weight:600;font-size:15px;padding:14px 26px;border-radius:2px;border:1px solid #F4F4F1;background:#F4F4F1;color:#0A0A0B;cursor:pointer;transition:transform .18s" style-hover="transform:translateY(-2px)" onClick="{{ openBook }}">Book a 20-minute call →</button>
       <button style="display:inline-flex;align-items:center;gap:10px;font-family:inherit;font-weight:600;font-size:15px;padding:14px 26px;border-radius:2px;border:1px solid rgba(255,255,255,.16);background:transparent;color:#F4F4F1;cursor:pointer" style-hover="border-color:#F4F4F1" onClick="{{ goWork }}">See it in action</button>
@@ -2405,6 +2405,22 @@ body.om-loading{overflow:hidden}
       <p style="color:#9EA0A8;font-size:17px;margin:18px auto 0;max-width:min(100%,58ch)">Founding rate for our first 10 clients, locked for your first 12 months. No contracts. Cancel anytime.</p>
     </div>
     <div data-rev-slow="2" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:28px;margin:52px auto 0;max-width:1000px;align-items:start">
+      <div style="border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:44px 38px;background:#17181C;display:flex;flex-direction:column">
+        <span style="font-family:'DM Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#9EA0A8">Launch</span>
+        <h3 style="font-size:clamp(24px,3vw,30px);font-weight:700;letter-spacing:-.03em;margin:12px 0 0;max-width:min(100%,16ch)">Never lose another lead</h3>
+        <p style="font-size:15px;margin:12px 0 20px;color:#9EA0A8;line-height:1.5;max-width:min(100%,40ch)">Every call, text and form gets an answer in under a minute, day or night, and it all lands in one inbox on your phone.</p>
+        <div style="display:flex;align-items:baseline;gap:7px"><span style="font-size:clamp(56px,7vw,70px);font-weight:800;letter-spacing:-.045em;line-height:1">$497</span><span style="font-family:'DM Mono',ui-monospace,monospace;font-size:15px;color:#9EA0A8">/month</span></div>
+        <div style="font-family:'DM Mono',ui-monospace,monospace;font-size:13px;margin-top:12px;color:#9EA0A8">+ $197 one-time onboarding</div>
+        <hr style="border:0;border-top:1px solid rgba(255,255,255,.09);margin:26px 0;width:100%">
+        <ul style="list-style:none;margin:0 0 28px;padding:0;display:grid;gap:13px;flex:1">
+          <li style="display:flex;gap:12px;align-items:flex-start;font-size:14.5px;line-height:1.45"><span style="flex:0 0 16px;color:#6E7079">◇</span>Website built to book jobs</li>
+          <li style="display:flex;gap:12px;align-items:flex-start;font-size:14.5px;line-height:1.45"><span style="flex:0 0 16px;color:#6E7079">◇</span>Instant text back on every missed call</li>
+          <li style="display:flex;gap:12px;align-items:flex-start;font-size:14.5px;line-height:1.45"><span style="flex:0 0 16px;color:#6E7079">◇</span>Review requests after every job</li>
+          <li style="display:flex;gap:12px;align-items:flex-start;font-size:14.5px;line-height:1.45"><span style="flex:0 0 16px;color:#6E7079">◇</span>One inbox, one business number</li>
+        </ul>
+        <button onClick="{{ openBook }}" style="width:100%;justify-content:center;display:inline-flex;align-items:center;gap:10px;font-family:inherit;font-weight:600;font-size:15px;padding:15px 24px;border-radius:2px;border:1px solid rgba(255,255,255,.16);background:transparent;color:#F4F4F1;cursor:pointer" style-hover="border-color:#F4F4F1">Start with Launch</button>
+        <span onClick="{{ goSystems }}" style="display:block;text-align:center;margin-top:16px;font-size:13.5px;color:#9EA0A8;cursor:pointer" style-hover="color:#F4F4F1">See everything inside →</span>
+      </div>
       <div style="border:1px solid #F4F4F1;border-radius:10px;padding:44px 38px;background:#F4F4F1;color:#0A0A0B;display:flex;flex-direction:column;position:relative;transform:translateY(-8px);box-shadow:0 44px 100px -54px rgba(0,0,0,.95)">
         <span style="position:absolute;top:40px;right:38px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:#0A0A0B;color:#F4F4F1;padding:5px 10px;border-radius:2px;font-weight:500">Best value</span>
         <span style="font-family:'DM Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#6E7079">Growth</span>
@@ -2422,22 +2438,6 @@ body.om-loading{overflow:hidden}
         <p style="font-size:13.5px;line-height:1.55;color:#3A3A3C;margin:0 0 22px">One recovered job usually pays for months of Growth. Ask us to run your numbers on the call.</p>
         <button onClick="{{ openBook }}" style="width:100%;justify-content:center;display:inline-flex;align-items:center;gap:10px;font-family:inherit;font-weight:600;font-size:15px;padding:15px 24px;border-radius:2px;border:1px solid #0A0A0B;background:#0A0A0B;color:#F4F4F1;cursor:pointer;transition:transform .18s" style-hover="transform:translateY(-2px)">Go with Growth</button>
         <span onClick="{{ goSystems }}" style="display:block;text-align:center;margin-top:16px;font-size:13.5px;color:#3A3A3C;cursor:pointer" style-hover="color:#0A0A0B">See everything inside →</span>
-      </div>
-      <div style="border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:44px 38px;background:#17181C;display:flex;flex-direction:column">
-        <span style="font-family:'DM Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#9EA0A8">Launch</span>
-        <h3 style="font-size:clamp(24px,3vw,30px);font-weight:700;letter-spacing:-.03em;margin:12px 0 0;max-width:min(100%,16ch)">Never lose another lead</h3>
-        <p style="font-size:15px;margin:12px 0 20px;color:#9EA0A8;line-height:1.5;max-width:min(100%,40ch)">Every call, text and form gets an answer in under a minute, day or night, and it all lands in one inbox on your phone.</p>
-        <div style="display:flex;align-items:baseline;gap:7px"><span style="font-size:clamp(56px,7vw,70px);font-weight:800;letter-spacing:-.045em;line-height:1">$497</span><span style="font-family:'DM Mono',ui-monospace,monospace;font-size:15px;color:#9EA0A8">/month</span></div>
-        <div style="font-family:'DM Mono',ui-monospace,monospace;font-size:13px;margin-top:12px;color:#9EA0A8">+ $197 one-time onboarding</div>
-        <hr style="border:0;border-top:1px solid rgba(255,255,255,.09);margin:26px 0;width:100%">
-        <ul style="list-style:none;margin:0 0 28px;padding:0;display:grid;gap:13px;flex:1">
-          <li style="display:flex;gap:12px;align-items:flex-start;font-size:14.5px;line-height:1.45"><span style="flex:0 0 16px;color:#6E7079">◇</span>Website built to book jobs</li>
-          <li style="display:flex;gap:12px;align-items:flex-start;font-size:14.5px;line-height:1.45"><span style="flex:0 0 16px;color:#6E7079">◇</span>Instant text back on every missed call</li>
-          <li style="display:flex;gap:12px;align-items:flex-start;font-size:14.5px;line-height:1.45"><span style="flex:0 0 16px;color:#6E7079">◇</span>Review requests after every job</li>
-          <li style="display:flex;gap:12px;align-items:flex-start;font-size:14.5px;line-height:1.45"><span style="flex:0 0 16px;color:#6E7079">◇</span>One inbox, one business number</li>
-        </ul>
-        <button onClick="{{ openBook }}" style="width:100%;justify-content:center;display:inline-flex;align-items:center;gap:10px;font-family:inherit;font-weight:600;font-size:15px;padding:15px 24px;border-radius:2px;border:1px solid rgba(255,255,255,.16);background:transparent;color:#F4F4F1;cursor:pointer" style-hover="border-color:#F4F4F1">Start with Launch</button>
-        <span onClick="{{ goSystems }}" style="display:block;text-align:center;margin-top:16px;font-size:13.5px;color:#9EA0A8;cursor:pointer" style-hover="color:#F4F4F1">See everything inside →</span>
       </div>
     </div>
     <div style="margin:44px auto 0;max-width:1000px;border:1px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(17,17,19,.55);padding:26px 30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:22px;align-items:center">
