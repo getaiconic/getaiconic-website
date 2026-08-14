@@ -11,6 +11,8 @@
   gtag('js', new Date());
   gtag('config', 'G-MGJFCQG4G2');
 </script>
+<!-- GoHighLevel booking-widget auto-resize (used by the "Book a call" calendar) -->
+<script src="https://link.msgsndr.com/js/form_embed.js" async></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Contractor Marketing Systems in Chicago | Websites, Booking &amp; Reviews | AICONIC</title>
 <meta name="description" content="Done-for-you marketing systems for Chicago contractors: booking websites, missed-call text back, review automation and lead follow-up. Live in 7 to 10 days.">
@@ -2667,55 +2669,7 @@ body.om-loading{overflow:hidden}
       <h2 style="font-size:30px;font-weight:700;letter-spacing:-.02em;line-height:1.1;margin:12px 0 8px">Grab a 20-minute slot.</h2>
       <p style="color:#9EA0A8;font-size:15px;margin-bottom:26px;max-width:min(100%,46ch)">Pick a day and time that works. You'll get a confirmation by text and email, and a calendar invite with the call link.</p>
 
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:28px">
-        <div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px">
-            <button onClick="{{ prevMonth }}" aria-label="Previous month" style="width:32px;height:32px;border-radius:4px;border:1px solid rgba(255,255,255,.16);background:transparent;color:#F4F4F1;cursor:pointer;font-size:15px;line-height:1" style-hover="border-color:#F4F4F1">‹</button>
-            <div style="font-weight:600;font-size:15.5px;letter-spacing:-.01em">{{ calLabel }}</div>
-            <button onClick="{{ nextMonth }}" aria-label="Next month" style="width:32px;height:32px;border-radius:4px;border:1px solid rgba(255,255,255,.16);background:transparent;color:#F4F4F1;cursor:pointer;font-size:15px;line-height:1" style-hover="border-color:#F4F4F1">›</button>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;font-family:'DM Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#6E7079;text-align:center;margin-bottom:6px">
-            <sc-for list="{{ weekdays }}" as="d" hint-placeholder-count="7"><span>{{ d }}</span></sc-for>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px">
-            <sc-for list="{{ calDays }}" as="d" hint-placeholder-count="35">
-              <button onClick="{{ d.pick }}" disabled="{{ d.disabled }}" style="{{ d.css }}">{{ d.label }}</button>
-            </sc-for>
-          </div>
-          <div style="display:flex;gap:16px;margin-top:16px;font-family:'DM Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#6E7079;flex-wrap:wrap">
-            <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:var(--acc,#E8E8E6);display:block"></span>Selected</span>
-            <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#2A2C33;display:block"></span>Unavailable</span>
-          </div>
-        </div>
-
-        <div>
-          <div style="font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#6E7079;margin-bottom:12px">{{ slotHeading }}</div>
-          <sc-if value="{{ hasDay }}">
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,96px),1fr));gap:8px">
-              <sc-for list="{{ slots }}" as="s" hint-placeholder-count="8">
-                <button onClick="{{ s.pick }}" style="{{ s.css }}">{{ s.label }}</button>
-              </sc-for>
-            </div>
-            <div style="font-family:'DM Mono',ui-monospace,monospace;font-size:10.5px;color:#6E7079;margin-top:12px">Times shown in Central Time (Chicago)</div>
-          </sc-if>
-          <sc-if value="{{ noDay }}" hint-placeholder-val="{{ true }}">
-            <div style="border:1px dashed rgba(255,255,255,.16);border-radius:6px;padding:26px 20px;color:#6E7079;font-size:14px;text-align:center">Pick a day on the left to see open times.</div>
-          </sc-if>
-
-          <div style="margin-top:24px;padding-top:22px;border-top:1px solid rgba(255,255,255,.09);display:grid;gap:12px">
-            <input value="{{ bookName }}" onChange="{{ setBookName }}" type="text" placeholder="Your name" style="width:100%;background:#0A0A0B;border:1px solid rgba(255,255,255,.16);border-radius:4px;color:#F4F4F1;font-family:inherit;font-size:15px;padding:12px 14px">
-            <input value="{{ bookEmail }}" onChange="{{ setBookEmail }}" type="email" placeholder="you@company.com" style="width:100%;background:#0A0A0B;border:1px solid rgba(255,255,255,.16);border-radius:4px;color:#F4F4F1;font-family:inherit;font-size:15px;padding:12px 14px">
-            <select value="{{ bookTrade }}" onChange="{{ setBookTrade }}" style="width:100%;background:#0A0A0B;border:1px solid rgba(255,255,255,.16);border-radius:4px;color:#F4F4F1;font-family:inherit;font-size:15px;padding:12px 14px;appearance:none">
-              <sc-for list="{{ tradeOptions }}" as="t" hint-placeholder-count="6">
-                <option value="{{ t.value }}">{{ t.label }}</option>
-              </sc-for>
-            </select>
-            <div style="font-family:'DM Mono',ui-monospace,monospace;font-size:12px;color:#9EA0A8;min-height:18px">{{ bookSummary }}</div>
-            <button onClick="{{ confirmBooking }}" style="{{ confirmCss }}">Confirm booking</button>
-            <sc-if value="{{ bookError }}"><div style="color:#C9C9C7;font-size:12.5px;font-family:'DM Mono',ui-monospace,monospace">{{ bookError }}</div></sc-if>
-          </div>
-        </div>
-      </div>
+      <iframe src="https://api.leadconnectorhq.com/widget/booking/npGiAUt9FSTdYIVghpOk" id="npGiAUt9FSTdYIVghpOk_booking" scrolling="no" title="Book a call with AICONIC" style="width:100%;border:none;min-height:760px;border-radius:8px;overflow:hidden;background:#fff"></iframe>
 
       <div style="margin-top:26px;padding-top:20px;border-top:1px solid rgba(255,255,255,.09);font-family:'DM Mono',ui-monospace,monospace;font-size:11px;color:#6E7079;line-height:1.7">
         Prefer to reach out directly? Email <span style="color:#E8E8E6">hello@getaiconic.com</span> and we'll find a time that works.
