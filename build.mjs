@@ -95,7 +95,11 @@ async function main() {
 
   const server = serve();
   await new Promise(r => server.listen(PORT, r));
-  const browser = await chromium.launch({ executablePath: EXE, args: ['--no-sandbox'] });
+  // Use the sandbox's prebuilt Chromium when present; otherwise let Playwright
+  // locate the browser it installed (CI: `npx playwright install chromium`).
+  const launchOpts = { args: ['--no-sandbox'] };
+  if (fs.existsSync(EXE)) launchOpts.executablePath = EXE;
+  const browser = await chromium.launch(launchOpts);
   const page = await browser.newPage({ viewport: { width: 1366, height: 1000 } });
 
   const faq = JSON.stringify(faqSchema(srcHtml));
