@@ -23,13 +23,16 @@
   // src/parse.ts
   function parseDcDocument(doc) {
     const dc = doc.querySelector("x-dc");
-    if (!dc) return null;
     const scriptEl = doc.querySelector("script[data-dc-script]");
     const { props, preview } = parseDataProps(
       scriptEl?.getAttribute("data-props") ?? null
     );
+    const tpl = dc
+      ? dc.innerHTML
+      : (typeof window !== "undefined" && window.__DC_TEMPLATE__ ? window.__DC_TEMPLATE__ : null);
+    if (tpl == null) return null;
     return {
-      template: dc.innerHTML,
+      template: tpl,
       js: scriptEl ? scriptEl.textContent || "" : "",
       props,
       preview
@@ -163,9 +166,19 @@
       });
     }
     const dc = doc.querySelector("x-dc");
-    const hostEl = doc.createElement("div");
-    hostEl.id = "dc-root";
-    dc.replaceWith(hostEl);
+    let hostEl;
+    if (dc) {
+      hostEl = doc.createElement("div");
+      hostEl.id = "dc-root";
+      dc.replaceWith(hostEl);
+    } else {
+      hostEl = doc.getElementById("dc-root");
+      if (!hostEl) {
+        hostEl = doc.createElement("div");
+        hostEl.id = "dc-root";
+        doc.body.appendChild(hostEl);
+      }
+    }
     if (!parsed.preview) {
       const s = doc.createElement("style");
       s.textContent = FULL_PAGE_CSS;

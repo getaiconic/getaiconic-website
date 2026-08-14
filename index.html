@@ -2850,10 +2850,20 @@ const DEMO_META = [
 
 const GHL_WEBHOOK_URL = "";
 
+// URL routing: map the in-memory page state to real paths and back, so every
+// page has its own URL (and the prerendered static files boot to the right page).
+const PAGE_TO_PATH = { home: "/", systems: "/products", product: "/products", pricing: "/pricing", about: "/about", faq: "/faq", process: "/how-it-works", work: "/work", blog: "/blog", contact: "/contact", legal: "/legal" };
+const PATH_TO_PAGE = { "": "home", "index.html": "home", "products": "systems", "pricing": "pricing", "about": "about", "faq": "faq", "how-it-works": "process", "work": "work", "blog": "blog", "contact": "contact", "legal": "legal" };
+function pageForPath(pathname) {
+  let seg = String(pathname || "/").replace(/^\/+|\/+$/g, "").split("/")[0].toLowerCase();
+  return PATH_TO_PAGE[seg] || "home";
+}
+function pathForPage(page) { return PAGE_TO_PATH[page] || "/"; }
+
 class Component extends DCLogic {
   state = {
     demos: null, posts: null, modal: null, postKey: null, demoKey: null, errName: false, errEmail: false,
-    wide: true, menuOpen: false, tradesOpen: false, productsOpen: false, mobProd: false, productKey: "site", page: "home",
+    wide: true, menuOpen: false, tradesOpen: false, productsOpen: false, mobProd: false, productKey: "site", page: (typeof location !== "undefined" ? pageForPath(location.pathname) : "home"),
     loading: true, pct: "00",
     calM: new Date().getMonth(), calY: new Date().getFullYear(),
     pickedDay: null, pickedSlot: null, bookName: "", bookEmail: "", bookTrade: "", bookError: "", bookedWhen: "", bookedEmail: "", revIdx: 0
@@ -3246,6 +3256,13 @@ class Component extends DCLogic {
   componentDidMount() {
     this.initCursor();
     requestAnimationFrame(() => { this.setupReveal(); this.primeVideos(); });
+    try {
+      if (typeof history !== "undefined" && !history.state) history.replaceState({ page: this.state.page }, "", location.pathname);
+      window.addEventListener("popstate", () => {
+        this.setState({ page: pageForPath(location.pathname), modal: null, menuOpen: false, productsOpen: false });
+        window.scrollTo({ top: 0, behavior: "instant" });
+      });
+    } catch (e) {}
     const takeContent = () => {
       const c = window.AICONIC_CONTENT;
       if (c && c.DEMOS) { this.setState({ demos: c.DEMOS, posts: c.POSTS }); return true; }
@@ -3528,12 +3545,22 @@ class Component extends DCLogic {
   go(id) {
     const page = id === "top" ? "home" : id;
     this.setState({ page: page, menuOpen: false, tradesOpen: false, productsOpen: false });
+    this.pushPath(page);
     window.scrollTo({ top: 0, behavior: "instant" });
+  }
+
+  pushPath(page) {
+    try {
+      const path = pathForPage(page);
+      if (typeof history !== "undefined" && location.pathname !== path) {
+        history.pushState({ page: page }, "", path);
+      }
+    } catch (e) {}
   }
 
   goLegal(doc) {
     this.setState({ page: "legal", legalDoc: doc, menuOpen: false, tradesOpen: false, productsOpen: false });
-    window.scrollTo({ top: 0, behavior: "instant" });
+    this.pushPath("legal");
     window.scrollTo({ top: 0, behavior: "instant" });
   }
 
@@ -3763,7 +3790,7 @@ class Component extends DCLogic {
       prod: this.productData()[s.productKey] || this.productData().site,
       products: Object.values(this.productData()).map(p => Object.assign({}, p, {
         active: s.page === "product" && s.productKey === p.key ? "#F4F4F1" : "#9EA0A8",
-        open: e => { if (e && e.stopPropagation) e.stopPropagation(); this.setState({ productsOpen: false, menuOpen: false, page: "product", productKey: p.key }); window.scrollTo({ top: 0, behavior: "instant" }); }
+        open: e => { if (e && e.stopPropagation) e.stopPropagation(); this.setState({ productsOpen: false, menuOpen: false, page: "product", productKey: p.key }); this.pushPath("product"); window.scrollTo({ top: 0, behavior: "instant" }); }
       })),
       openBook: () => this.open("book"),
       closeModal: () => this.setState({ modal: null }),

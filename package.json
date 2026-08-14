@@ -1,0 +1,12 @@
+{
+  "name": "getaiconic-website",
+  "private": true,
+  "description": "AICONIC marketing site. Source is index.html (client-rendered engine); build.mjs prerenders per-route static HTML into dist/ for SEO.",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "1.48.0"
+  }
+}
