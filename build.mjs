@@ -102,19 +102,42 @@ async function main() {
   const browser = await chromium.launch(launchOpts);
   const page = await browser.newPage({ viewport: { width: 1366, height: 1000 } });
 
-  const faq = JSON.stringify(faqSchema(srcHtml));
+  const faqLd = faqSchema(srcHtml);
+
+  // discover blog posts and add a prerendered route per slug (/blog/<slug>)
+  await page.goto(`http://localhost:${PORT}/blog`, { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => window.AICONIC_CONTENT && window.AICONIC_CONTENT.POSTS, { timeout: 20000 }).catch(() => {});
+  const posts = await page.evaluate(() => {
+    const P = (window.AICONIC_CONTENT && window.AICONIC_CONTENT.POSTS) || {};
+    return Object.keys(P).map(k => {
+      const text = String(P[k].html || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+      return { slug: k, title: P[k].title, cat: P[k].cat, text: text.slice(0, 240) };
+    });
+  });
+  const postRoutes = posts.map(p => ({
+    path: '/blog/' + p.slug, page: 'post',
+    title: (p.title.length > 62 ? p.title.slice(0, 59).trim() + '…' : p.title),
+    desc: (p.text.length > 158 ? p.text.slice(0, 155).trim() + '…' : p.text) || p.title,
+    postTitle: p.title,
+    jsonld: { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: p.title, articleSection: p.cat, author: { '@type': 'Person', name: 'Annie' }, publisher: { '@type': 'Organization', name: 'AICONIC' }, mainEntityOfPage: ORIGIN + '/blog/' + p.slug }
+  }));
+  const allRoutes = ROUTES.map(r => ({ ...r, jsonld: r.page === 'faq' ? faqLd : null })).concat(postRoutes);
+
   const results = [];
-  for (const r of ROUTES) {
+  for (const r of allRoutes) {
     await page.goto(`http://localhost:${PORT}${r.path}`, { waitUntil: 'domcontentloaded' });
     // wait until the app has rendered real content (no {{ }}) and the loader is gone
     await page.waitForFunction(() => {
       const root = document.getElementById('dc-root');
       return root && root.textContent && root.textContent.length > 500 && !document.documentElement.innerHTML.includes('{{ ');
     }, { timeout: 25000 }).catch(() => {});
+    if (r.page === 'post') {
+      await page.waitForFunction((t) => document.body.innerText.includes(t.slice(0, 30)), r.postTitle, { timeout: 15000 }).catch(() => {});
+    }
     await page.waitForTimeout(2500);
 
     await page.evaluate((cfg) => {
-      const { title, desc, canonical, origin, isFaq, faq } = cfg;
+      const { title, desc, canonical, origin, jsonld } = cfg;
       const head = document.head;
       // base href so subdir routes resolve /support.js, /assets/... correctly
       let base = head.querySelector('base'); if (!base) { base = document.createElement('base'); head.insertBefore(base, head.firstChild); }
@@ -133,10 +156,10 @@ async function main() {
       link.setAttribute('href', canonical);
       // template module for re-boot (page has no <x-dc> after render)
       if (!head.querySelector('script[data-dc-template]')) { const s = document.createElement('script'); s.setAttribute('data-dc-template', ''); s.src = '/app.template.js'; head.insertBefore(s, head.querySelector('script[src$="support.js"]') || null); }
-      // FAQ schema only where it renders
-      document.querySelectorAll('script[data-faq-schema]').forEach(n => n.remove());
-      if (isFaq) { const s = document.createElement('script'); s.type = 'application/ld+json'; s.setAttribute('data-faq-schema', ''); s.textContent = faq; head.appendChild(s); }
-    }, { title: r.title, desc: r.desc, canonical: ORIGIN + r.path, origin: ORIGIN, isFaq: r.page === 'faq', faq });
+      // per-route JSON-LD (FAQPage on /faq, BlogPosting on posts)
+      document.querySelectorAll('script[data-route-schema]').forEach(n => n.remove());
+      if (jsonld) { const s = document.createElement('script'); s.type = 'application/ld+json'; s.setAttribute('data-route-schema', ''); s.textContent = jsonld; head.appendChild(s); }
+    }, { title: r.title, desc: r.desc, canonical: ORIGIN + r.path, origin: ORIGIN, jsonld: r.jsonld ? JSON.stringify(r.jsonld) : null });
 
     let html = await page.content();
     html = html.replace(/^<!DOCTYPE[^>]*>/i, '').trim();
@@ -145,12 +168,11 @@ async function main() {
     const dir = r.path === '/' ? DIST : path.join(DIST, r.path.replace(/^\//, ''));
     fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(path.join(dir, 'index.html'), out);
-    const hasFaqText = /Do I have to learn new software/.test(html);
-    results.push({ route: r.path, bytes: out.length, hasContent: html.length > 3000, faqText: r.page === 'faq' ? hasFaqText : undefined, rawPlaceholders: (html.match(/\{\{ [a-zA-Z]/g) || []).length });
+    results.push({ route: r.path, bytes: out.length, hasContent: html.length > 3000, rawPlaceholders: (html.match(/\{\{ [a-zA-Z]/g) || []).length });
   }
 
   // sitemap
-  const urls = ROUTES.map(r => `  <url><loc>${ORIGIN}${r.path === '/' ? '/' : r.path}</loc></url>`).join('\n');
+  const urls = allRoutes.map(r => `  <url><loc>${ORIGIN}${r.path === '/' ? '/' : r.path}</loc></url>`).join('\n');
   fs.writeFileSync(path.join(DIST, 'sitemap.xml'),
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemap.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`.replace('sitemap.org', 'sitemaps.org'));
 

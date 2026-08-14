@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Contractor Marketing Systems in Chicago | Websites, Booking &amp; Reviews | AICONIC</title>
 <meta name="description" content="Done-for-you marketing systems for Chicago contractors: booking websites, missed-call text back, review automation and lead follow-up. Live in 7 to 10 days.">
@@ -3259,13 +3260,18 @@ class Component extends DCLogic {
     try {
       if (typeof history !== "undefined" && !history.state) history.replaceState({ page: this.state.page }, "", location.pathname);
       window.addEventListener("popstate", () => {
-        this.setState({ page: pageForPath(location.pathname), modal: null, menuOpen: false, productsOpen: false });
+        const m = /^\/blog\/([^/]+)\/?$/.exec(location.pathname);
+        if (m && this.state.posts && this.state.posts[m[1]]) {
+          this.setState({ page: "blog", modal: "post", postKey: m[1], menuOpen: false, productsOpen: false });
+        } else {
+          this.setState({ page: pageForPath(location.pathname), modal: null, menuOpen: false, productsOpen: false });
+        }
         window.scrollTo({ top: 0, behavior: "instant" });
       });
     } catch (e) {}
     const takeContent = () => {
       const c = window.AICONIC_CONTENT;
-      if (c && c.DEMOS) { this.setState({ demos: c.DEMOS, posts: c.POSTS }); return true; }
+      if (c && c.DEMOS) { this.setState({ demos: c.DEMOS, posts: c.POSTS }); this.openPostFromUrl(c.POSTS); return true; }
       return false;
     };
     if (!takeContent()) {
@@ -3558,6 +3564,18 @@ class Component extends DCLogic {
     } catch (e) {}
   }
 
+  openPost(key) {
+    this.setState({ modal: "post", postKey: key });
+    try { if (typeof history !== "undefined") history.pushState({ page: "blog", postKey: key }, "", "/blog/" + key); } catch (e) {}
+  }
+
+  openPostFromUrl(posts) {
+    try {
+      const m = /^\/blog\/([^/]+)\/?$/.exec(location.pathname);
+      if (m && posts && posts[m[1]]) this.setState({ page: "blog", modal: "post", postKey: m[1] });
+    } catch (e) {}
+  }
+
   goLegal(doc) {
     this.setState({ page: "legal", legalDoc: doc, menuOpen: false, tradesOpen: false, productsOpen: false });
     this.pushPath("legal");
@@ -3699,7 +3717,7 @@ class Component extends DCLogic {
       })),
       postCards: s.posts ? Object.keys(s.posts).map(k => {
         const p = s.posts[k];
-        return { key: k, img: p.img, cat: p.cat, title: p.title, meta: p.date + " · " + p.read + " min read", open: () => this.open("post", { postKey: k }) };
+        return { key: k, img: p.img, cat: p.cat, title: p.title, meta: p.date + " · " + p.read + " min read", open: () => this.openPost(k) };
       }) : [],
       wideNav: s.wide, narrowNav: !s.wide, menuOpen: s.menuOpen,
       headerCss: "position:fixed;top:0;left:0;right:0;z-index:80;padding:14px 20px;background:transparent",
@@ -3793,7 +3811,7 @@ class Component extends DCLogic {
         open: e => { if (e && e.stopPropagation) e.stopPropagation(); this.setState({ productsOpen: false, menuOpen: false, page: "product", productKey: p.key }); this.pushPath("product"); window.scrollTo({ top: 0, behavior: "instant" }); }
       })),
       openBook: () => this.open("book"),
-      closeModal: () => this.setState({ modal: null }),
+      closeModal: () => { const wasPost = this.state.modal === "post"; this.setState({ modal: null }); if (wasPost) { try { if (typeof history !== "undefined" && /^\/blog\/.+/.test(location.pathname)) history.pushState({ page: "blog" }, "", "/blog"); } catch (e) {} } },
       backdrop: e => { if (e.target === e.currentTarget) this.setState({ modal: null }); },
       toContact: () => { this.setState({ modal: null }); setTimeout(() => this.go("contact"), 60); },
       submit: e => this.submit(e)
