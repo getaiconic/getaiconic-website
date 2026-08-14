@@ -1522,6 +1522,63 @@ body.om-loading{overflow:hidden}
 </section>
 </sc-if>
 
+<sc-if value="{{ pgHome }}">
+<section data-screen-label="Systems" style="padding:80px 0;border-top:1px solid rgba(255,255,255,.09);background:{{ bgSystems }};position:relative;overflow:hidden">
+  <div style="box-sizing:border-box;width:100%;max-width:1160px;margin:0 auto;padding:0 24px;position:relative;z-index:2">
+    <div style="max-width:min(100%,66ch);margin:0 auto;text-align:center">
+      <span style="font-family:'DM Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#9EA0A8;font-weight:500">The systems</span>
+      <h2 style="font-size:clamp(30px,4.4vw,52px);line-height:1.02;font-weight:700;letter-spacing:-.03em;margin:14px 0 0">Everything a busy contractor needs, <em style="font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400">nothing they don't.</em></h2>
+      <p style="color:#9EA0A8;font-size:17px;margin:18px auto 0;max-width:min(100%,58ch)">Eight systems working together so every call, click and past customer turns into more booked work.</p>
+    </div>
+    <div style="margin:44px auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px">
+      <div onClick="{{ goSystems }}" style="border:1px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(23,24,28,.55);padding:22px;cursor:pointer;transition:border-color .2s,transform .2s" style-hover="border-color:rgba(255,255,255,.3);transform:translateY(-3px)">
+        <span style="font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.16em;color:#6E7079">01</span>
+        <h3 style="font-size:17px;font-weight:600;letter-spacing:-.01em;margin:10px 0 0">A website that books the job</h3>
+        <p style="color:#9EA0A8;font-size:13.5px;line-height:1.5;margin:8px 0 0">Your site turns a visitor into a text conversation on your phone, not just an online business card.</p>
+      </div>
+      <div onClick="{{ goSystems }}" style="border:1px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(23,24,28,.55);padding:22px;cursor:pointer;transition:border-color .2s,transform .2s" style-hover="border-color:rgba(255,255,255,.3);transform:translateY(-3px)">
+        <span style="font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.16em;color:#6E7079">02</span>
+        <h3 style="font-size:17px;font-weight:600;letter-spacing:-.01em;margin:10px 0 0">Missed a call? They still hear from you</h3>
+        <p style="color:#9EA0A8;font-size:13.5px;line-height:1.5;margin:8px 0 0">The second you miss a call, a text goes out automatically and keeps the lead warm.</p>
+      </div>
+      <div onClick="{{ goSystems }}" style="border:1px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(23,24,28,.55);padding:22px;cursor:pointer;transition:border-color .2s,transform .2s" style-hover="border-color:rgba(255,255,255,.3);transform:translateY(-3px)">
+        <span style="font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.16em;color:#6E7079">03</span>
+        <h3 style="font-size:17px;font-weight:600;letter-spacing:-.01em;margin:10px 0 0">More five-star reviews, on autopilot</h3>
+        <p style="color:#9EA0A8;font-size:13.5px;line-height:1.5;margin:8px 0 0">We remind happy customers, guide them, and catch problems early so you can make them right.</p>
+      </div>
+      <div onClick="{{ goSystems }}" style="border:1px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(23,24,28,.55);padding:22px;cursor:pointer;transition:border-color .2s,transform .2s" style-hover="border-color:rgba(255,255,255,.3);transform:translateY(-3px)">
+        <span style="font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.16em;color:#6E7079">04</span>
+        <h3 style="font-size:17px;font-weight:600;letter-spacing:-.01em;margin:10px 0 0">Beat the competition to the lead</h3>
+        <p style="color:#9EA0A8;font-size:13.5px;line-height:1.5;margin:8px 0 0">The contractor who replies first usually wins. Every lead gets an instant reply and follow-up.</p>
+      </div>
+      <div onClick="{{ goSystems }}" style="border:1px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(23,24,28,.55);padding:22px;cursor:pointer;transition:border-color .2s,transform .2s" style-hover="border-color:rgba(255,255,255,.3);transform:translateY(-3px)">
+        <span style="font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.16em;color:#6E7079">05</span>
+        <h3 style="font-size:17px;font-weight:600;letter-spacing:-.01em;margin:10px 0 0">Turn old customers into new revenue</h3>
+        <p style="color:#9EA0A8;font-size:13.5px;line-height:1.5;margin:8px 0 0">Your customer list is money sitting idle. One-click campaigns bring past clients back.</p>
+      </div>
+      <div onClick="{{ goSystems }}" style="border:1px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(23,24,28,.55);padding:22px;cursor:pointer;transition:border-color .2s,transform .2s" style-hover="border-color:rgba(255,255,255,.3);transform:translateY(-3px)">
+        <span style="font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.16em;color:#6E7079">06</span>
+        <h3 style="font-size:17px;font-weight:600;letter-spacing:-.01em;margin:10px 0 0">One number for the business</h3>
+        <p style="color:#9EA0A8;font-size:13.5px;line-height:1.5;margin:8px 0 0">A proper business line keeps the work on one number and your evenings on another.</p>
+      </div>
+      <div onClick="{{ goSystems }}" style="border:1px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(23,24,28,.55);padding:22px;cursor:pointer;transition:border-color .2s,transform .2s" style-hover="border-color:rgba(255,255,255,.3);transform:translateY(-3px)">
+        <span style="font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.16em;color:#6E7079">07</span>
+        <h3 style="font-size:17px;font-weight:600;letter-spacing:-.01em;margin:10px 0 0">Every message in one place</h3>
+        <p style="color:#9EA0A8;font-size:13.5px;line-height:1.5;margin:8px 0 0">Texts, emails, web chat and voicemails, one thread per customer instead of five apps.</p>
+      </div>
+      <div onClick="{{ goSystems }}" style="border:1px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(23,24,28,.55);padding:22px;cursor:pointer;transition:border-color .2s,transform .2s" style-hover="border-color:rgba(255,255,255,.3);transform:translateY(-3px)">
+        <span style="font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.16em;color:#6E7079">08</span>
+        <h3 style="font-size:17px;font-weight:600;letter-spacing:-.01em;margin:10px 0 0">Show up in the towns you work in</h3>
+        <p style="color:#9EA0A8;font-size:13.5px;line-height:1.5;margin:8px 0 0">People search for someone near them and call from the first three results. Be one of them.</p>
+      </div>
+    </div>
+    <div style="margin-top:32px;text-align:center">
+      <button onClick="{{ goSystems }}" style="display:inline-flex;align-items:center;gap:10px;font-family:inherit;font-weight:600;font-size:15px;padding:13px 24px;border-radius:2px;border:1px solid rgba(255,255,255,.16);background:transparent;color:#F4F4F1;cursor:pointer" style-hover="border-color:#F4F4F1">See how each system works →</button>
+    </div>
+  </div>
+</section>
+</sc-if>
+
 <sc-if value="{{ pgLegal }}">
 <section id="legal" data-screen-label="Legal" style="padding:92px 0 104px;border-top:1px solid rgba(255,255,255,.09);background:linear-gradient(180deg,#0B0B0D 0%,#16161A 52%,#0B0B0D 100%);position:relative;overflow:hidden">
   <div style="box-sizing:border-box;width:100%;max-width:1160px;margin:0 auto;padding:0 24px;position:relative;z-index:2">
@@ -1636,7 +1693,7 @@ body.om-loading{overflow:hidden}
 </section>
 </sc-if>
 
-<sc-if value="{{ showSystems }}">
+<sc-if value="{{ pgSystems }}">
 <section id="systems" style="padding: 92px 0; background: {{ bgSystems }}">
   <div style="box-sizing:border-box;width:100%;max-width: 1160px; margin: 0 auto; padding: 0 24px; background: linear-gradient(180deg, #10101000, #1F1F1F00)">
     <div style="max-width:min(100%,66ch);margin:0 auto;text-align:center">
@@ -2408,22 +2465,6 @@ body.om-loading{overflow:hidden}
       <div style="background:#0F1013;padding:32px 26px;text-align:center"><div ref="{{ c2 }}" data-count="24" data-suffix="/7" style="font-size:42px;font-weight:700;letter-spacing:-.03em;line-height:1">0</div><div style="color:#9EA0A8;font-size:14px;margin-top:8px">Lead capture, always on</div></div>
       <div style="background:#0F1013;padding:32px 26px;text-align:center"><div ref="{{ c3 }}" data-count="2" style="font-size:42px;font-weight:700;letter-spacing:-.03em;line-height:1">0</div><div style="color:#9EA0A8;font-size:14px;margin-top:8px">Buttons to run it</div></div>
       <div style="background:#0F1013;padding:32px 26px;text-align:center"><div style="font-size:42px;font-weight:700;letter-spacing:-.03em;line-height:1">$<em style="font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400">0</em></div><div style="color:#9EA0A8;font-size:14px;margin-top:8px">Contract. Cancel anytime</div></div>
-    </div>
-  </div>
-</section>
-</sc-if>
-
-<sc-if value="{{ pgHome }}">
-<section style="padding: 92px 0; border-top: 1px solid rgba(255,255,255,.09); background-color: #111112EB">
-  <div style="box-sizing:border-box;width:100%;max-width:1160px;margin:0 auto;padding:0 24px;position:relative;z-index:2">
-    <div style="max-width:min(100%,64ch);margin:0 auto;text-align:center">
-      <span style="font-family:'DM Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#9EA0A8;font-weight:500">Straight talk</span>
-      <h2 style="font-size:clamp(30px,4.4vw,52px);line-height:1.02;font-weight:700;letter-spacing:-.03em;margin:14px 0 0">A new studio, and <em style="font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400">honest about it.</em></h2>
-      <p style="color:#9EA0A8;font-size:17px;line-height:1.6;margin:20px 0 0">AICONIC is new, so you won't find a wall of five-star reviews here yet — and I'm not going to fake them. What I can show you is the work: ten concept builds you can actually scroll and click, and a system that goes live in seven to ten days. Be one of the first Chicago contractors on it.</p>
-      <div style="margin-top:30px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <button onClick="{{ goWork }}" style="display:inline-flex;align-items:center;gap:10px;font-family:inherit;font-weight:600;font-size:15px;padding:14px 26px;border-radius:2px;border:1px solid #F4F4F1;background:#F4F4F1;color:#0A0A0B;cursor:pointer;transition:transform .18s" style-hover="transform:translateY(-2px)">See the work →</button>
-        <button onClick="{{ openBook }}" style="display:inline-flex;align-items:center;gap:10px;font-family:inherit;font-weight:600;font-size:15px;padding:14px 26px;border-radius:2px;border:1px solid rgba(255,255,255,.16);background:transparent;color:#F4F4F1;cursor:pointer" style-hover="border-color:#F4F4F1">Book a call</button>
-      </div>
     </div>
   </div>
 </section>
