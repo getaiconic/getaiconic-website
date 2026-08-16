@@ -2851,7 +2851,8 @@ class Component extends DCLogic {
       }, { rootMargin: "0px 0px -14% 0px", threshold: 0.02 });
     }
     // top-level blocks; when a block is a multi-item grid/flex, animate its children instead
-    const blocks = [...document.querySelectorAll("section > div > *, footer > div > *")];
+    // (footer is intentionally excluded so it renders statically, no reveal animation)
+    const blocks = [...document.querySelectorAll("section > div > *")];
     const targets = [];
     blocks.forEach(b => {
       const d = getComputedStyle(b).display;
