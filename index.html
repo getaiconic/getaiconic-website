@@ -1651,6 +1651,9 @@ body.om-loading{overflow:hidden}
       <ul style="margin:0 0 14px;padding:0 0 0 20px;display:grid;gap:9px;color:#9EA0A8;font-size:15.5px;line-height:1.6;max-width:min(100%,74ch)"><li>Information you give us: name, business name, email address, phone number, and anything you type into a form or send us in a message.</li><li>Information collected automatically: pages viewed, approximate location derived from IP address, device and browser type, referring source, and interaction events.</li><li>Client operational data: for clients, the calls, messages, contacts and job records processed by systems we operate on your behalf.</li></ul>
       <h3 style="font-size:19px;font-weight:700;letter-spacing:-.015em;margin:38px 0 10px;color:#F4F4F1">Why we use it</h3>
       <p style="color:#9EA0A8;font-size:15.5px;line-height:1.68;margin:0 0 14px;max-width:min(100%,74ch)">To respond to enquiries, provide and operate the service, bill for it, improve it, keep it secure, and meet our legal obligations. We do not sell your personal information. We do not share it except with service providers who help us deliver the service, or where required by law.</p>
+      <h3 style="font-size:19px;font-weight:700;letter-spacing:-.015em;margin:38px 0 10px;color:#F4F4F1">Text messages and mobile information</h3>
+      <p style="color:#9EA0A8;font-size:15.5px;line-height:1.68;margin:0 0 14px;max-width:min(100%,74ch)">If you give us your mobile number and opt in on our contact form or when booking a call, AICONIC LLC may send you text messages: non-marketing messages such as appointment confirmations, reminders and follow-up about your enquiry, and — only if you separately opt in — marketing messages about offers, discounts and service updates. Message frequency may vary. Message and data rates may apply. Reply STOP to any message to opt out, or reply HELP for help. Consent to receive text messages is not a condition of any purchase.</p>
+      <p style="color:#9EA0A8;font-size:15.5px;line-height:1.68;margin:0 0 14px;max-width:min(100%,74ch)">No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. Information sharing to subcontractors in support services, such as customer service, is permitted. All other use case categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</p>
       <h3 style="font-size:19px;font-weight:700;letter-spacing:-.015em;margin:38px 0 10px;color:#F4F4F1">Where it lives</h3>
       <p style="color:#9EA0A8;font-size:15.5px;line-height:1.68;margin:0 0 14px;max-width:min(100%,74ch)">We use third-party providers for hosting, email, messaging, telephony, analytics and payments. Those providers process data under their own terms and security practices. Data may be processed in the United States.</p>
       <h3 style="font-size:19px;font-weight:700;letter-spacing:-.015em;margin:38px 0 10px;color:#F4F4F1">How long we keep it</h3>
@@ -2594,6 +2597,17 @@ body.om-loading{overflow:hidden}
         <div>
           <label style="font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9EA0A8;display:block;margin-bottom:7px">What do you need help with?</label>
           <textarea name="message" rows="4" placeholder="Tell us a bit about your business and goals" style="width:100%;background:#0A0A0B;border:1px solid rgba(255,255,255,.16);border-radius:4px;color:#F4F4F1;font-family:inherit;font-size:15px;padding:13px 14px;resize:vertical"></textarea>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,.09);padding-top:16px;display:grid;gap:12px">
+          <label style="display:flex;gap:10px;align-items:flex-start;cursor:pointer;color:#9EA0A8;font-size:12.5px;line-height:1.55">
+            <input name="smsMarketing" type="checkbox" style="margin-top:3px;flex:0 0 auto;width:16px;height:16px;accent-color:#F4F4F1">
+            <span>I consent to receive marketing text messages, about special offers, discounts, and service updates, from AICONIC LLC at the phone number provided. Message frequency may vary. Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.</span>
+          </label>
+          <label style="display:flex;gap:10px;align-items:flex-start;cursor:pointer;color:#9EA0A8;font-size:12.5px;line-height:1.55">
+            <input name="smsTransactional" type="checkbox" style="margin-top:3px;flex:0 0 auto;width:16px;height:16px;accent-color:#F4F4F1">
+            <span>I consent to receive non-marketing text messages from AICONIC LLC about appointment confirmations, reminders, and follow-up about my inquiry. Message frequency may vary, message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.</span>
+          </label>
+          <p style="color:#6E7079;font-size:12px;line-height:1.55;margin:2px 0 0">Consent to receive text messages is not a condition of any purchase. See our <a href="/privacy" style="color:#9EA0A8;text-decoration:underline" style-hover="color:#F4F4F1">Privacy Policy</a> and <a href="/terms" style="color:#9EA0A8;text-decoration:underline" style-hover="color:#F4F4F1">Terms</a>.</p>
         </div>
         <button type="submit" style="margin-top:6px;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;font-weight:600;font-size:15px;padding:14px 24px;border-radius:2px;border:1px solid #F4F4F1;background:#F4F4F1;color:#0A0A0B;cursor:pointer;transition:transform .18s" style-hover="transform:translateY(-2px)">Send message →</button>
       </form>
@@ -3631,7 +3645,7 @@ class Component extends DCLogic {
     const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     this.setState({ errName: !name, errEmail: !okEmail });
     if (!name || !okEmail) return;
-    const payload = { name: name, email: email, phone: f.phone.value.trim(), trade: f.trade.value, message: f.message.value.trim(), source: "aiconic-website" };
+    const payload = { name: name, email: email, phone: f.phone.value.trim(), trade: f.trade.value, message: f.message.value.trim(), smsMarketingConsent: !!(f.smsMarketing && f.smsMarketing.checked), smsTransactionalConsent: !!(f.smsTransactional && f.smsTransactional.checked), source: "aiconic-website" };
     const done = () => { f.reset(); this.setState({ modal: "success", errName: false, errEmail: false }); };
     if (GHL_WEBHOOK_URL) {
       fetch(GHL_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }).then(done).catch(done);
