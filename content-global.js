@@ -39,9 +39,17 @@ nav{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.95);-webkit-ba
 .btn{display:inline-flex;align-items:center;gap:8px;background:#0F5FD8;color:#fff;font-weight:700;font-size:15px;padding:13px 22px;border-radius:9px;border:0;cursor:pointer}
 .btn:hover{background:#0A3F94}
 .btn.g{background:#fff;color:#0F5FD8;border:1.5px solid #CFDEF6}
-.hero{background:radial-gradient(130% 120% at 88% -10%,#D8E7FF 0,transparent 52%),linear-gradient(150deg,#EAF2FF,#F7FAFF);border-bottom:1px solid #E1EAF7}
-.hero .w{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:center;padding:88px 24px}
-.card>video{box-shadow:0 46px 92px -46px rgba(12,21,34,.55)}
+.hero{position:relative;min-height:min(620px,88vh);display:flex;align-items:flex-end;overflow:hidden;background:#08122A}
+.hero .bg{position:absolute;inset:0}
+.hero .bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero .bg:after{content:"";position:absolute;inset:0;background:linear-gradient(72deg,rgba(6,14,32,.94) 22%,rgba(10,63,148,.58) 64%,rgba(15,95,216,.28))}
+.hero .w{position:relative;z-index:2;padding:0 24px 78px;color:#fff;display:block;max-width:1100px}
+.hero .pill{background:rgba(255,255,255,.14);color:#EAF2FF}
+.hero h1{color:#fff;max-width:15ch;text-shadow:0 2px 30px rgba(0,0,0,.35)}
+.hero .sub{color:rgba(255,255,255,.86)}
+.hero .badge{display:inline-flex;align-items:center;gap:14px;margin-top:28px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:14px 20px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.hero .badge b{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1}
+.hero .badge span{font-size:13px;color:rgba(255,255,255,.82);font-weight:600}
 .showcase{position:relative;padding:104px 0;background:linear-gradient(rgba(8,18,32,.84),rgba(15,63,152,.72)),url(${S[1]}) center/cover;background-attachment:scroll;color:#fff;text-align:center}
 .showcase .eye{color:#AECBFF}
 .showcase h2{color:#fff}
@@ -95,13 +103,12 @@ footer{background:#0C1522;color:#fff;padding:44px 0 34px;font-size:14px}
 <div class="nr"><span class="tel">(312) 555-0148</span><a class="btn" href="#c">Book online</a></div>
 </div></nav>
 
-<div class="hero"><div class="w">
-<div><span class="pill">Under 60 min average arrival</span>
+<div class="hero"><div class="bg"><video src="${VID.plumb}" poster="${S[0]}" autoplay muted loop playsinline volume="0"></video></div><div class="w">
+<span class="pill">Under 60 min average arrival · 7 days a week</span>
 <h1>Chicago plumbing, done right the first time.</h1>
 <p class="sub">Licensed plumbers who show up on time, quote before they start, and leave the place cleaner than they found it.</p>
-<div class="acts"><a class="btn" href="#c">Book online</a><a class="btn g" href="#s">See services</a></div></div>
-<div class="card"><video src="${VID.plumb}" poster="${S[0]}" autoplay muted loop playsinline volume="0" style="display:block;width:100%;height:100%;object-fit:cover"></video>
-<div class="float"><b>$0</b><span>Diagnostic with any repair</span></div></div>
+<div class="acts"><a class="btn" href="#c">Book online</a><a class="btn g" href="#s">See services</a></div>
+<div class="badge"><b>$0</b><span>Diagnostic with any repair</span></div>
 </div></div>
 
 <section id="s"><div class="w"><span class="eye">Services</span><h2>Every pipe, drain and heater in your home.</h2>
@@ -290,7 +297,14 @@ nav{max-width:1000px;margin:0 auto;background:rgba(255,255,255,.9);-webkit-backd
 .btn{display:inline-flex;align-items:center;gap:8px;background:#0E8C74;color:#fff;font-weight:700;font-size:14.5px;padding:12px 22px;border-radius:100px;border:0;cursor:pointer}
 .btn:hover{background:#0A6D5A}
 .btn.g{background:#EFF8F5;color:#0E8C74}
-.hero{text-align:center;padding:64px 0 0}
+.hero{position:relative;min-height:min(620px,86vh);display:flex;align-items:center;text-align:center;overflow:hidden;background:#08201C}
+.hero .bg{position:absolute;inset:0}
+.hero .bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero .bg:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,26,22,.84),rgba(14,109,90,.6) 58%,rgba(8,26,22,.9))}
+.hero .w{position:relative;z-index:2;padding:96px 24px}
+.hero h1{color:#fff;text-shadow:0 2px 30px rgba(0,0,0,.35)}
+.hero .sub{color:rgba(255,255,255,.88)}
+.hero .pill{background:rgba(255,255,255,.16);color:#DFF6EF}
 .pill{display:inline-flex;align-items:center;gap:8px;background:rgba(14,140,116,.12);color:#0E8C74;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:8px 16px;border-radius:100px}
 h1{font-size:clamp(38px,5.4vw,62px);line-height:1.02;font-weight:800;letter-spacing:-.04em;margin:20px auto 0;max-width:18ch}
 .sub{color:#3E605A;font-size:18.5px;margin:18px auto 0;max-width:46ch}
@@ -339,12 +353,11 @@ footer{background:#0E1F1C;color:#fff;padding:44px 0 32px;font-size:14px}
 <a class="btn" href="#c">Book a tune-up</a>
 </div></nav></div>
 
-<div class="hero"><div class="w">
+<div class="hero"><div class="bg"><video src="${VID.hvac}" poster="${H[0]}" autoplay muted loop playsinline volume="0"></video></div><div class="w">
 <span class="pill">Comfort you stop thinking about</span>
 <h1>Air that feels right in every room.</h1>
 <p class="sub">Maintenance, repair and high-efficiency installs from a team that explains the options instead of upselling you.</p>
 <div class="acts"><a class="btn" href="#c">Book a tune-up</a><a class="btn g" href="#m">See membership</a></div>
-<div class="shot"><video src="${VID.hvac}" poster="${H[0]}" autoplay muted loop playsinline volume="0" style="display:block;width:100%;height:100%;object-fit:cover"></video></div>
 </div></div>
 
 <section id="s"><div class="w"><span class="eye">Services</span><h2>Heating, cooling, and the air in between.</h2>
