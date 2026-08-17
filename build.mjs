@@ -34,6 +34,10 @@ const ROUTES = [
   { path: '/terms',        page: 'legal',   title: 'Terms of Service | AICONIC', desc: 'The terms that govern the marketing and communication systems AICONIC builds and operates for contractors and small local businesses. Read them before you rely on the service.' },
   { path: '/cookies',      page: 'legal',   title: 'Cookie Notice | AICONIC', desc: 'How AICONIC uses cookies and similar technologies on getaiconic.com, what they do, and how you can control them.' },
   { path: '/disclaimer',   page: 'legal',   title: 'Disclaimer | AICONIC', desc: 'Figures, demo sites and case studies shown by AICONIC are illustrative. Results vary and are not guaranteed. Nothing here is legal, tax or professional advice.' },
+  // Common-slug aliases so any guessed URL resolves (canonical points to the primary page).
+  { path: '/privacy-policy',       page: 'legal', alias: true, canonical: ORIGIN + '/privacy', title: 'Privacy Policy | AICONIC', desc: 'How AICONIC collects, uses, protects and lets you control your personal information, including text messaging and mobile information. We do not sell your data.' },
+  { path: '/terms-of-service',     page: 'legal', alias: true, canonical: ORIGIN + '/terms',   title: 'Terms of Service | AICONIC', desc: 'The terms that govern the marketing and communication systems AICONIC builds and operates, including its SMS text message program (STOP/HELP).' },
+  { path: '/terms-and-conditions', page: 'legal', alias: true, canonical: ORIGIN + '/terms',   title: 'Terms of Service | AICONIC', desc: 'The terms that govern the marketing and communication systems AICONIC builds and operates, including its SMS text message program (STOP/HELP).' },
 ];
 
 // ---- tiny static server with SPA fallback (serve file if it exists, else index.html) ----
@@ -163,7 +167,7 @@ async function main() {
       // per-route JSON-LD (FAQPage on /faq, BlogPosting on posts)
       document.querySelectorAll('script[data-route-schema]').forEach(n => n.remove());
       if (jsonld) { const s = document.createElement('script'); s.type = 'application/ld+json'; s.setAttribute('data-route-schema', ''); s.textContent = jsonld; head.appendChild(s); }
-    }, { title: r.title, desc: r.desc, canonical: ORIGIN + r.path, origin: ORIGIN, jsonld: r.jsonld ? JSON.stringify(r.jsonld) : null });
+    }, { title: r.title, desc: r.desc, canonical: r.canonical || (ORIGIN + r.path), origin: ORIGIN, jsonld: r.jsonld ? JSON.stringify(r.jsonld) : null });
 
     let html = await page.content();
     html = html.replace(/^<!DOCTYPE[^>]*>/i, '').trim();
@@ -176,7 +180,7 @@ async function main() {
   }
 
   // sitemap
-  const urls = allRoutes.map(r => `  <url><loc>${ORIGIN}${r.path === '/' ? '/' : r.path}</loc></url>`).join('\n');
+  const urls = allRoutes.filter(r => !r.alias).map(r => `  <url><loc>${ORIGIN}${r.path === '/' ? '/' : r.path}</loc></url>`).join('\n');
   fs.writeFileSync(path.join(DIST, 'sitemap.xml'),
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemap.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`.replace('sitemap.org', 'sitemaps.org'));
 

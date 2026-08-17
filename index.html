@@ -2839,7 +2839,7 @@ const PATH_TO_PAGE = { "": "home", "index.html": "home", "products": "systems", 
 // Legal sub-documents each get their own deep-linkable URL (/privacy, /terms,
 // /cookies, /disclaimer) so they can be referenced individually (A2P, crawlers).
 const LEGAL_DOC_TO_PATH = { terms: "/terms", privacy: "/privacy", cookies: "/cookies", disclaimer: "/disclaimer" };
-const PATH_TO_LEGAL_DOC = { "terms": "terms", "privacy": "privacy", "cookies": "cookies", "disclaimer": "disclaimer" };
+const PATH_TO_LEGAL_DOC = { "terms": "terms", "privacy": "privacy", "cookies": "cookies", "disclaimer": "disclaimer", "privacy-policy": "privacy", "terms-of-service": "terms", "terms-and-conditions": "terms", "cookie-policy": "cookies" };
 function pageForPath(pathname) {
   let seg = String(pathname || "/").replace(/^\/+|\/+$/g, "").split("/")[0].toLowerCase();
   if (PATH_TO_LEGAL_DOC[seg]) return "legal";
