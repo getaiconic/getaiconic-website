@@ -297,14 +297,21 @@ nav{max-width:1000px;margin:0 auto;background:rgba(255,255,255,.9);-webkit-backd
 .btn{display:inline-flex;align-items:center;gap:8px;background:#0E8C74;color:#fff;font-weight:700;font-size:14.5px;padding:12px 22px;border-radius:100px;border:0;cursor:pointer}
 .btn:hover{background:#0A6D5A}
 .btn.g{background:#EFF8F5;color:#0E8C74}
-.hero{position:relative;min-height:min(620px,86vh);display:flex;align-items:center;text-align:center;overflow:hidden;background:#08201C}
-.hero .bg{position:absolute;inset:0}
-.hero .bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero .bg:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,26,22,.84),rgba(14,109,90,.6) 58%,rgba(8,26,22,.9))}
-.hero .w{position:relative;z-index:2;padding:96px 24px}
-.hero h1{color:#fff;text-shadow:0 2px 30px rgba(0,0,0,.35)}
-.hero .sub{color:rgba(255,255,255,.88)}
-.hero .pill{background:rgba(255,255,255,.16);color:#DFF6EF}
+.hero{position:relative;overflow:hidden;background:radial-gradient(96% 130% at 10% -10%,#E1F6EE 0,#F5FBF8 48%,#E8F5F0 100%)}
+.hero:before{content:"";position:absolute;width:460px;height:460px;right:-90px;top:-140px;background:radial-gradient(circle,rgba(14,140,116,.2),transparent 68%);border-radius:50%;pointer-events:none}
+.hero:after{content:"";position:absolute;width:340px;height:340px;left:-120px;bottom:-160px;background:radial-gradient(circle,rgba(111,216,192,.28),transparent 70%);border-radius:50%;pointer-events:none}
+.hero .w{position:relative;z-index:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:52px;align-items:center;padding:80px 24px 88px}
+.hero h1{color:#0E1F1C;margin-left:0}
+.hero .sub{margin-left:0}
+.hero .acts{justify-content:flex-start}
+.hpic{position:relative;border-radius:28px;overflow:hidden;box-shadow:0 54px 96px -46px rgba(14,31,28,.55);border:1px solid rgba(255,255,255,.7);aspect-ratio:4/5;background:#0E1F1C}
+.hpic video{width:100%;height:100%;object-fit:cover;display:block}
+.hpic:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(14,31,28,.32));pointer-events:none}
+.hchip{position:absolute;z-index:2;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.8);border-radius:16px;padding:14px 18px;box-shadow:0 24px 46px -24px rgba(14,31,28,.45)}
+.hchip b{display:block;font-size:23px;font-weight:800;color:#0E8C74;letter-spacing:-.02em;line-height:1}
+.hchip span{font-size:12px;color:#587772;font-weight:600}
+.hchip.a{left:-18px;top:30px}
+.hchip.b{right:-16px;bottom:34px}
 .pill{display:inline-flex;align-items:center;gap:8px;background:rgba(14,140,116,.12);color:#0E8C74;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:8px 16px;border-radius:100px}
 h1{font-size:clamp(38px,5.4vw,62px);line-height:1.02;font-weight:800;letter-spacing:-.04em;margin:20px auto 0;max-width:18ch}
 .sub{color:#3E605A;font-size:18.5px;margin:18px auto 0;max-width:46ch}
@@ -353,11 +360,17 @@ footer{background:#0E1F1C;color:#fff;padding:44px 0 32px;font-size:14px}
 <a class="btn" href="#c">Book a tune-up</a>
 </div></nav></div>
 
-<div class="hero"><div class="bg"><video src="${VID.hvac}" poster="${H[0]}" autoplay muted loop playsinline volume="0"></video></div><div class="w">
+<div class="hero"><div class="w">
+<div>
 <span class="pill">Comfort you stop thinking about</span>
 <h1>Air that feels right in every room.</h1>
 <p class="sub">Maintenance, repair and high-efficiency installs from a team that explains the options instead of upselling you.</p>
 <div class="acts"><a class="btn" href="#c">Book a tune-up</a><a class="btn g" href="#m">See membership</a></div>
+</div>
+<div class="hpic"><video src="${VID.hvac}" poster="${H[0]}" autoplay muted loop playsinline volume="0"></video>
+<div class="hchip a"><b>4.9★</b><span>286 reviews</span></div>
+<div class="hchip b"><b>2 hr</b><span>Emergency response</span></div>
+</div>
 </div></div>
 
 <section id="s"><div class="w"><span class="eye">Services</span><h2>Heating, cooling, and the air in between.</h2>
