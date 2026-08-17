@@ -1955,47 +1955,10 @@ body.om-loading{overflow:hidden}
         <div style="display:flex;gap:12px;align-items:center;margin-top:14px;font-size:15px"><span style="width:8px;height:8px;border-radius:50%;background:#E8E8E6;display:block"></span><span onClick="{{ openBook }}" style="color:#E8E8E6;cursor:pointer">Or book a call now →</span></div>
         <div style="margin-top:28px;font-family:'DM Mono',ui-monospace,monospace;font-size:12px;color:#6E7079"><a href="mailto:hello@getaiconic.com" style="color:#9EA0A8" style-hover="color:#F4F4F1">hello@getaiconic.com</a></div>
       </div>
-      <form onSubmit="{{ submit }}" noValidate="{{ true }}" style="border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:30px;background:#17181C;display:grid;gap:16px">
-        <div>
-          <label style="font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9EA0A8;display:block;margin-bottom:7px">Name</label>
-          <input name="name" type="text" placeholder="Your name" style="width:100%;background:#0A0A0B;border:1px solid rgba(255,255,255,.16);border-radius:4px;color:#F4F4F1;font-family:inherit;font-size:15px;padding:13px 14px">
-          <sc-if value="{{ errName }}"><div style="color:#C9C9C7;font-size:12.5px;font-family:'DM Mono',ui-monospace,monospace;margin-top:6px">Please enter your name.</div></sc-if>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:14px">
-          <div>
-            <label style="font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9EA0A8;display:block;margin-bottom:7px">Email</label>
-            <input name="email" type="email" placeholder="you@company.com" style="width:100%;background:#0A0A0B;border:1px solid rgba(255,255,255,.16);border-radius:4px;color:#F4F4F1;font-family:inherit;font-size:15px;padding:13px 14px">
-            <sc-if value="{{ errEmail }}"><div style="color:#C9C9C7;font-size:12.5px;font-family:'DM Mono',ui-monospace,monospace;margin-top:6px">Enter a valid email.</div></sc-if>
-          </div>
-          <div>
-            <label style="font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9EA0A8;display:block;margin-bottom:7px">Phone</label>
-            <input name="phone" type="tel" placeholder="(312) 555-0100" style="width:100%;background:#0A0A0B;border:1px solid rgba(255,255,255,.16);border-radius:4px;color:#F4F4F1;font-family:inherit;font-size:15px;padding:13px 14px">
-          </div>
-        </div>
-        <div>
-          <label style="font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9EA0A8;display:block;margin-bottom:7px">Trade</label>
-          <select name="trade" style="width:100%;background:#0A0A0B;border:1px solid rgba(255,255,255,.16);border-radius:4px;color:#F4F4F1;font-family:inherit;font-size:15px;padding:13px 14px">
-            <option value="">Select your trade</option><option>Plumbing</option><option>HVAC</option><option>Electrical</option><option>Roofing</option><option>Landscaping</option><option>Remodeling</option><option>Other</option>
-          </select>
-        </div>
-        <div>
-          <label style="font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9EA0A8;display:block;margin-bottom:7px">What do you need help with?</label>
-          <textarea name="message" rows="4" placeholder="Tell us a bit about your business and goals" style="width:100%;background:#0A0A0B;border:1px solid rgba(255,255,255,.16);border-radius:4px;color:#F4F4F1;font-family:inherit;font-size:15px;padding:13px 14px;resize:vertical"></textarea>
-        </div>
-        <div style="border-top:1px solid rgba(255,255,255,.09);padding-top:16px;display:grid;gap:12px">
-          <label style="display:flex;gap:10px;align-items:flex-start;cursor:pointer;color:#9EA0A8;font-size:12.5px;line-height:1.55">
-            <input name="smsMarketing" type="checkbox" style="margin-top:3px;flex:0 0 auto;width:16px;height:16px;accent-color:#F4F4F1">
-            <span>I consent to receive marketing text messages, about special offers, discounts, and service updates, from AICONIC LLC at the phone number provided. Message frequency may vary. Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.</span>
-          </label>
-          <label style="display:flex;gap:10px;align-items:flex-start;cursor:pointer;color:#9EA0A8;font-size:12.5px;line-height:1.55">
-            <input name="smsTransactional" type="checkbox" style="margin-top:3px;flex:0 0 auto;width:16px;height:16px;accent-color:#F4F4F1">
-            <span>I consent to receive non-marketing text messages from AICONIC LLC about appointment confirmations, reminders, and follow-up about my inquiry. Message frequency may vary, message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.</span>
-          </label>
-          <p style="color:#6E7079;font-size:12px;line-height:1.55;margin:2px 0 0">Consent to receive text messages is not a condition of any purchase. See our <a href="/privacy" style="color:#9EA0A8;text-decoration:underline" style-hover="color:#F4F4F1">Privacy Policy</a> and <a href="/terms" style="color:#9EA0A8;text-decoration:underline" style-hover="color:#F4F4F1">Terms</a>.</p>
-        </div>
-        <p style="color:#6E7079;font-size:12px;line-height:1.55;margin:0">By submitting this form you agree to our <a href="/terms" style="color:#9EA0A8;text-decoration:underline" style-hover="color:#F4F4F1">Terms of Service</a> and <a href="/privacy" style="color:#9EA0A8;text-decoration:underline" style-hover="color:#F4F4F1">Privacy Policy</a>.</p>
-        <button type="submit" style="margin-top:6px;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;font-weight:600;font-size:15px;padding:14px 24px;border-radius:2px;border:1px solid #F4F4F1;background:#F4F4F1;color:#0A0A0B;cursor:pointer;transition:transform .18s" style-hover="transform:translateY(-2px)">Send message →</button>
-      </form>
+      <div style="border:1px solid rgba(255,255,255,.09);border-radius:10px;overflow:hidden;background:#0A0A0B">
+        <iframe src="https://api.leadconnectorhq.com/widget/form/bUNPplQFWkDLI6mJG9NR" style="display:block;width:100%;height:1071px;border:none;background:#0A0A0B" id="inline-bUNPplQFWkDLI6mJG9NR" data-layout="{'id':'INLINE'}" data-trigger-type="alwaysShow" data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" data-deactivation-type="neverDeactivate" data-deactivation-value="" data-form-name="Website Contact" data-height="1071" data-layout-iframe-id="inline-bUNPplQFWkDLI6mJG9NR" data-form-id="bUNPplQFWkDLI6mJG9NR" title="Website Contact"></iframe>
+      </div>
+      <p style="color:#6E7079;font-size:12px;line-height:1.55;margin:14px 0 0">By submitting this form you agree to receive text messages from AICONIC LLC — appointment confirmations, reminders and follow-up, and (only if you separately opt in) offers. Message frequency may vary. Message &amp; data rates may apply. Reply STOP to opt out, reply HELP for help. Consent to receive texts is not a condition of any purchase. See our <a href="/privacy" style="color:#9EA0A8;text-decoration:underline" style-hover="color:#F4F4F1">Privacy Policy</a> and <a href="/terms" style="color:#9EA0A8;text-decoration:underline" style-hover="color:#F4F4F1">Terms of Service</a>.</p>
     </div>
   </div>
 </section>
