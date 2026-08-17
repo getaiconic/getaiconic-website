@@ -20,7 +20,7 @@ const ORIGIN = 'https://getaiconic.com';
 const PORT = 8188;
 
 const ROUTES = [
-  { path: '/',             page: 'home',    title: 'Websites, Missed-Call Text Back, Follow-Up & Booking for Illinois Contractors | AICONIC', desc: 'Done-for-you websites, missed-call text back, lead follow-up, review automation and reactivation campaigns for Illinois plumbers, HVAC, electricians and roofers. Live in 7 to 10 days.' },
+  { path: '/',             page: 'home',    title: 'Websites, Missed-Call Text Back, Follow-Up & Booking for Illinois Contractors | AICONIC', desc: 'Done-for-you websites, missed-call text back, lead follow-up, review automation and seasonal campaigns for Illinois plumbers, HVAC, electricians and roofers. Live in 7 to 10 days.' },
   { path: '/products',     page: 'systems', title: 'The Systems: 8 Done-for-You Marketing Tools | AICONIC', desc: 'Eight systems that book contractor jobs: a website that books, missed-call text back, review automation, speed to lead, reactivation, one business number and local search.' },
   { path: '/pricing',      page: 'pricing', title: 'Pricing: Launch $497 and Growth $797 a Month | AICONIC', desc: 'Simple contractor marketing pricing. Launch at $497/month covers website, missed-call text back and reviews. Growth at $797/month adds follow-up and local search.' },
   { path: '/how-it-works', page: 'process', title: 'How It Works: Live in 7 to 10 Days | AICONIC', desc: 'Three short steps from first call to launch. We map where your leads leak, build your booking and follow-up system, and hand you the keys. Live in 7 to 10 days.' },
