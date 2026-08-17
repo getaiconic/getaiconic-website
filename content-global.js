@@ -16,7 +16,7 @@ const C = [B+"hf_20260730_203553_f42b2b63-d0b3-4f45-bb12-41034349bdeb.png", B+"h
 const D = [B+"hf_20260730_203612_504c23f3-893e-4598-8e74-ccfb6a4a4b95.png", B+"hf_20260730_203619_d3da1dfe-d4f0-433e-8c05-259a5b2bec93.png", B+"hf_20260730_203625_af722bff-8307-4233-8d81-56c8d7547eed.png"];
 const W = [B+"hf_20260730_203631_30083ea6-6642-4fd0-8bdc-929e48fd554a.png", B+"hf_20260730_203636_e6b6ba24-12de-4d08-9b83-2af20fe57082.png", B+"hf_20260730_203641_d5f30163-21f7-4145-a99c-b14b872a40e9.png"];
 
-const RESET = `*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}a{text-decoration:none;color:inherit}img{display:block;max-width:100%}ul{list-style:none}`;
+const RESET = `*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}a{text-decoration:none;color:inherit}img{display:block;max-width:100%}ul{list-style:none}a,button,input,select,textarea,label,summary{pointer-events:none!important}`;
 
 /* ─────────────────────────  A · SUMMIT PLUMBING
    Layout: utility bar + centred nav, offset hero card, numbered service rows,
@@ -28,7 +28,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:#0C1522;backgrou
 .w{max-width:1100px;margin:0 auto;padding:0 24px}
 .util{background:#0A3F94;color:#fff;font-size:13px;font-weight:600}
 .util .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:9px 24px}
-nav{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid #E1EAF7}
+nav{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.95);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid #E1EAF7}
 .nb{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;height:74px}
 .bd{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.02em}
 .bd s{width:32px;height:32px;border-radius:9px;background:#0F5FD8;color:#fff;display:grid;place-items:center;font-size:14px;text-decoration:none}
@@ -39,8 +39,15 @@ nav{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.95);backdrop-f
 .btn{display:inline-flex;align-items:center;gap:8px;background:#0F5FD8;color:#fff;font-weight:700;font-size:15px;padding:13px 22px;border-radius:9px;border:0;cursor:pointer}
 .btn:hover{background:#0A3F94}
 .btn.g{background:#fff;color:#0F5FD8;border:1.5px solid #CFDEF6}
-.hero{background:linear-gradient(150deg,#EAF2FF,#F7FAFF)}
-.hero .w{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:center;padding:74px 24px}
+.hero{background:radial-gradient(130% 120% at 88% -10%,#D8E7FF 0,transparent 52%),linear-gradient(150deg,#EAF2FF,#F7FAFF);border-bottom:1px solid #E1EAF7}
+.hero .w{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:center;padding:88px 24px}
+.card>video{box-shadow:0 46px 92px -46px rgba(12,21,34,.55)}
+.showcase{position:relative;padding:104px 0;background:linear-gradient(rgba(8,18,32,.84),rgba(15,63,152,.72)),url(${S[1]}) center/cover;background-attachment:scroll;color:#fff;text-align:center}
+.showcase .eye{color:#AECBFF}
+.showcase h2{color:#fff}
+.showcase .lede{color:rgba(255,255,255,.8);margin-left:auto;margin-right:auto}
+.gg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:40px}
+.gg img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;box-shadow:0 40px 70px -34px rgba(0,0,0,.75);border:1px solid rgba(255,255,255,.12)}
 .pill{display:inline-flex;align-items:center;gap:8px;background:rgba(15,95,216,.1);color:#0F5FD8;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border-radius:100px}
 h1{font-size:clamp(36px,4.6vw,54px);line-height:1.04;font-weight:800;letter-spacing:-.03em;margin:18px 0 0}
 .sub{color:#41546D;font-size:18px;margin-top:16px;max-width:42ch}
@@ -123,6 +130,10 @@ footer{background:#0C1522;color:#fff;padding:44px 0 34px;font-size:14px}
 <li style="display:flex;gap:12px;font-size:15.5px"><b style="color:#0F5FD8">✓</b>Text updates the moment the tech is on the way</li>
 </ul></div></div></section>
 
+<div class="showcase"><div class="w"><span class="eye">Recent work</span><h2>Installs we would show your neighbours.</h2>
+<p class="lede">Before-and-after from jobs across Chicago and the near west suburbs.</p>
+<div class="gg"><img src="${S[0]}" alt="Recent plumbing project"><img src="${S[1]}" alt="Recent plumbing project"><img src="${S[2]}" alt="Recent plumbing project"></div></div></div>
+
 <section id="r" style="background:#F7FAFF"><div class="w"><span class="eye">Reviews</span><h2>412 neighbours, one very high bar.</h2>
 <div class="revwrap" style="margin-top:36px">
 <div class="score"><b>4.9</b><div class="st">★★★★★</div><span>412 Google reviews<br>Verified by Google Business</span></div>
@@ -193,8 +204,15 @@ h2{font-family:'Barlow Condensed',sans-serif;font-size:clamp(34px,4.4vw,52px);li
 .more .st{color:#B4441F;letter-spacing:2px;font-size:13px}
 .more q{display:block;font-size:16px;margin:10px 0 12px;quotes:none}
 .more .who{font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:#6B6459}
-.cta{background:#B4441F;color:#fff;padding:88px 0;text-align:center}
+.cta{position:relative;background:linear-gradient(rgba(23,21,18,.74),rgba(180,68,31,.85)),url(${R[0]}) center/cover;color:#fff;padding:106px 0;text-align:center}
 .cta h2{max-width:22ch;margin:0 auto}
+.gallery{background:#171512;padding:92px 0}
+.gallery h2{color:#fff}
+.gallery .eye{color:#E0703F}
+.ggr{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:36px}
+.ggr figure{position:relative;overflow:hidden}
+.ggr img{width:100%;aspect-ratio:4/3;object-fit:cover;filter:saturate(1.05)}
+.ggr figcaption{position:absolute;left:12px;bottom:12px;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:13.5px;letter-spacing:.14em;text-transform:uppercase;background:rgba(23,21,18,.62);padding:6px 11px}
 .cta p{margin:16px auto 28px;max-width:44ch;opacity:.85;font-size:17px}
 footer{background:#171512;color:#fff;padding:60px 0 36px}
 .wm{font-family:'Barlow Condensed',sans-serif;font-size:clamp(48px,11vw,140px);line-height:.85;font-weight:800;text-transform:uppercase;opacity:.14}
@@ -232,6 +250,9 @@ footer{background:#171512;color:#fff;padding:60px 0 36px}
 <ul class="ul"><li><b>→</b><span>Architectural shingle systems with full ventilation rebuild</span></li><li><b>→</b><span>Standing-seam metal for low-maintenance decades</span></li><li><b>→</b><span>TPO and modified bitumen for flat and low-slope</span></li></ul></div>
 <img src="${R[2]}" alt=""></div></div>
 
+<div class="gallery"><div class="w"><span class="eye">Recent roofs</span><h2 style="color:#fff">Tear-off to final walk.</h2>
+<div class="ggr"><figure><img src="${R[0]}" alt="Recent roof"><figcaption>Architectural · Wheaton</figcaption></figure><figure><img src="${R[1]}" alt="Recent roof"><figcaption>Standing seam · Naperville</figcaption></figure><figure><img src="${R[2]}" alt="Recent roof"><figcaption>Storm rebuild · Aurora</figcaption></figure></div></div></div>
+
 <div class="quote"><div class="w"><div class="st">★★★★★</div>
 <q>Six houses on our street used Iron Peak after the June storm. Ours was done in one day.</q>
 <div class="qw"><img src="${F[0]}" alt="">Greg M. · Wheaton · July 2026</div></div></div>
@@ -260,7 +281,7 @@ const clearair = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><me
 body{font-family:'Manrope',system-ui,sans-serif;color:#0E1F1C;background:#F5FBF8;line-height:1.6}
 .w{max-width:1080px;margin:0 auto;padding:0 24px}
 .navwrap{position:sticky;top:0;z-index:30;padding:18px 24px}
-nav{max-width:1000px;margin:0 auto;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);border:1px solid #DCEBE6;border-radius:100px;box-shadow:0 14px 34px -20px rgba(14,31,28,.28)}
+nav{max-width:1000px;margin:0 auto;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid #DCEBE6;border-radius:100px;box-shadow:0 14px 34px -20px rgba(14,31,28,.28)}
 .nb{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 14px 12px 22px}
 .bd{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:-.03em}
 .bd s{width:32px;height:32px;border-radius:50%;background:#0E8C74;color:#fff;display:grid;place-items:center;font-size:13px;text-decoration:none}
@@ -299,8 +320,15 @@ h2{font-size:clamp(28px,3.6vw,42px);line-height:1.08;font-weight:800;letter-spac
 .rev q{display:block;font-size:15.5px;margin:12px 0 16px;quotes:none}
 .rev .who{display:flex;align-items:center;gap:11px;font-size:13.5px;font-weight:700;color:#587772}
 .rev .who img{width:38px;height:38px;border-radius:50%;object-fit:cover}
-.cta{background:#0E8C74;color:#fff;border-radius:28px;padding:70px 40px;text-align:center;margin:0 24px 78px;max-width:1080px}
+.cta{position:relative;overflow:hidden;background:linear-gradient(rgba(10,109,90,.88),rgba(14,140,116,.9)),url(${H[2]}) center/cover;color:#fff;border-radius:28px;padding:78px 40px;text-align:center;margin:0 24px 78px;max-width:1080px}
 .cta h2{color:#fff;max-width:22ch;margin:0 auto}
+.feature{position:relative;padding:100px 0;background:linear-gradient(rgba(14,31,28,.82),rgba(14,140,116,.64)),url(${H[1]}) center/cover;color:#fff;text-align:center;margin-top:8px}
+.feature .eye{color:#8FE3D0}
+.feature h2{color:#fff;margin:10px auto 0}
+.feature .lede{color:rgba(255,255,255,.82);margin-left:auto;margin-right:auto}
+.fstat{display:flex;gap:44px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+.fstat b{display:block;font-size:40px;font-weight:800;letter-spacing:-.03em}
+.fstat span{font-size:13px;opacity:.82}
 .cta p{margin:16px auto 26px;max-width:44ch;opacity:.86;font-size:17px}
 footer{background:#0E1F1C;color:#fff;padding:44px 0 32px;font-size:14px}
 .fb{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;opacity:.65;margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.14);font-size:12.5px}
@@ -327,6 +355,10 @@ footer{background:#0E1F1C;color:#fff;padding:44px 0 32px;font-size:14px}
 <div class="c"><span class="n">03</span><h3>Air quality</h3><p>Filtration, humidity control and duct sealing for the rooms that never feel right.</p><img src="${H[2]}" alt=""></div>
 <div class="c"><span class="n">04</span><h3>Emergency service</h3><p>No heat, no cooling, strange noise. Two-hour response window, seven days a week.</p><img src="${H[0]}" alt=""></div>
 </div></div></section>
+
+<div class="feature"><div class="w"><span class="eye">Why homeowners switch</span><h2>Comfort you stop thinking about.</h2>
+<p class="lede">Precision tune-ups, honest options and a two-hour emergency window across the western suburbs.</p>
+<div class="fstat"><div><b>4.9★</b><span>286 reviews</span></div><div><b>2 hr</b><span>Emergency response</span></div><div><b>18 yr</b><span>In the suburbs</span></div></div></div></div>
 
 <div class="w" id="m"><div class="plan">
 <div><span class="eye" style="color:#6FD8C0">Membership</span><h2>The tune-up that pays for itself.</h2>
@@ -360,7 +392,7 @@ const verdant = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><met
 body{font-family:'Jost',system-ui,sans-serif;color:#1B2A1E;background:#FDFCF7;line-height:1.7;font-weight:300}
 .w{max-width:1160px;margin:0 auto;padding:0 32px}
 .srf{font-family:'Cormorant Garamond',Georgia,serif}
-nav{position:sticky;top:0;z-index:30;background:rgba(253,252,247,.94);backdrop-filter:blur(10px);border-bottom:1px solid #E2DFD0}
+nav{position:sticky;top:0;z-index:30;background:rgba(253,252,247,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid #E2DFD0}
 .nb{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;padding:22px 32px}
 .nl{display:flex;gap:26px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:400;color:#61705F}
 .nl.r{justify-content:flex-end}
@@ -393,7 +425,7 @@ h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(30px,3.8vw,46p
 .q .st{color:#A98A3C;letter-spacing:4px;font-size:12px}
 .q blockquote{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;line-height:1.42;font-style:italic;margin:16px 0 18px}
 .q .who{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#61705F}
-.cta{background:#1B2A1E;color:#FDFCF7;text-align:center;padding:104px 0}
+.cta{position:relative;background:linear-gradient(rgba(20,32,23,.84),rgba(27,42,30,.8)),url(${V[1]}) center/cover;color:#FDFCF7;text-align:center;padding:122px 0}
 .cta h2{color:#FDFCF7;margin:0 auto;max-width:22ch}
 .cta p{margin:18px auto 8px;max-width:42ch;color:rgba(253,252,247,.72);font-size:17px}
 footer{padding:52px 0 40px}
@@ -441,701 +473,7 @@ footer{padding:52px 0 40px}
 <div class="fb"><span>Evanston, IL · (847) 555-0176</span><span>© 2026 Verdant Landscape Co.</span></div></div></footer>
 </body></html>`;
 
-/* ─────────────────────────  E · BRIGHT LINE ELECTRIC
-   Layout: amber utility hero, capability grid, panel-style pricing table.    */
-const brightline = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bright Line Electric</title>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>${RESET}
-body{font-family:'Barlow',system-ui,sans-serif;color:#151310;background:#fff;line-height:1.6}
-.w{max-width:1140px;margin:0 auto;padding:0 24px}
-.util{background:#151310;color:#FFC53D;font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:.1em;text-transform:uppercase}
-.util .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:10px 24px}
-nav{position:sticky;top:0;z-index:30;background:#fff;border-bottom:3px solid #151310}
-.nb{display:flex;align-items:center;justify-content:space-between;height:76px;gap:20px}
-.bd{display:flex;align-items:center;gap:10px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:25px;letter-spacing:.02em;text-transform:uppercase}
-.bd s{width:34px;height:34px;background:#FFC53D;display:grid;place-items:center;text-decoration:none;font-size:18px;transform:skewX(-8deg)}
-.nl{display:flex;gap:24px;font-weight:600;font-size:14.5px;color:#5A554C}
-.nl a:hover{color:#151310}
-.btn{display:inline-flex;align-items:center;gap:8px;background:#FFC53D;color:#151310;font-weight:700;font-size:15px;padding:14px 24px;border:0;cursor:pointer;transform:skewX(-8deg)}
-.btn span{display:block;transform:skewX(8deg)}
-.btn:hover{background:#F2B21F}
-.btn.d{background:#151310;color:#FFC53D}
-.hero{background:#151310;color:#fff;position:relative;overflow:hidden}
-.hero:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(255,197,61,.09) 0 14px,transparent 14px 28px)}
-.hero .w{position:relative;z-index:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:46px;align-items:center;padding:72px 24px}
-.tag{display:inline-block;background:#FFC53D;color:#151310;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.16em;text-transform:uppercase;padding:6px 14px}
-h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(44px,6.6vw,74px);line-height:.98;font-weight:700;text-transform:uppercase;margin-top:18px}
-h1 em{color:#FFC53D;font-style:normal}
-.sub{color:#C9C4B8;font-size:17.5px;margin-top:16px;max-width:44ch}
-.acts{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
-.hero img{width:100%;aspect-ratio:4/3;object-fit:cover;border:4px solid #FFC53D}
-.badges{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));border-bottom:3px solid #151310}
-.badge{padding:22px 24px;border-right:1px solid #E6E2D8;font-family:'Barlow Condensed',sans-serif;font-size:16px;letter-spacing:.08em;text-transform:uppercase;display:flex;gap:10px;align-items:center}
-.badge b{color:#F2B21F;font-size:20px}
-section{padding:78px 0}
-.eye{font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:#A8894A}
-h2{font-family:'Barlow Condensed',sans-serif;font-size:clamp(30px,4.4vw,48px);font-weight:700;text-transform:uppercase;line-height:1.02;margin-top:8px}
-.lede{color:#5A554C;font-size:16.5px;margin-top:12px;max-width:56ch}
-.cap{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;margin-top:40px}
-.c{border:2px solid #151310;padding:26px;background:#FFFDF6}
-.c b{font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:.14em;color:#A8894A}
-.c h3{font-family:'Barlow Condensed',sans-serif;font-size:24px;text-transform:uppercase;margin-top:8px}
-.c p{color:#5A554C;font-size:15px;margin-top:8px}
-.c:hover{background:#FFF6DF}
-.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:46px;align-items:center}
-.split img{width:100%;aspect-ratio:4/3;object-fit:cover}
-.tbl{margin-top:34px;border-top:3px solid #151310}
-.tr{display:grid;grid-template-columns:1fr auto;gap:20px;padding:18px 0;border-bottom:1px solid #E6E2D8;align-items:baseline}
-.tr h4{font-family:'Barlow Condensed',sans-serif;font-size:21px;text-transform:uppercase}
-.tr p{color:#5A554C;font-size:14.5px}
-.tr b{font-family:'Barlow Condensed',sans-serif;font-size:23px;color:#151310;white-space:nowrap}
-.rev{background:#FFF6DF}
-.revs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:36px}
-.rv{background:#fff;border:2px solid #151310;padding:24px}
-.rv .st{color:#F2B21F;letter-spacing:2px}
-.rv q{display:block;quotes:none;font-size:15.5px;margin:10px 0 14px}
-.rv .who{display:flex;gap:10px;align-items:center;font-size:13.5px;font-weight:600;color:#5A554C}
-.rv .who img{width:34px;height:34px;border-radius:50%;object-fit:cover}
-.end{background:#151310;color:#fff;text-align:center}
-.end h2{color:#FFC53D}
-footer{background:#0D0C0A;color:#8B867B;padding:38px 0;font-size:13.5px}
-.fb{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-</style></head><body>
-<div class="util"><div class="w"><span>24/7 emergency callout</span><span>Licensed · Bonded · Insured</span></div></div>
-<nav><div class="w nb"><div class="bd"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" style="flex:0 0 auto"><path d="M16 1 31 16 16 31 1 16 16 1Z" fill="#FFC53D"/><path d="M18.2 6 10.5 17.6H15l-1.7 8.6L23.2 14H18l.2-8Z" fill="#151310"/></svg>Bright Line Electric</div>
-<div class="nl"><a href="#s">Services</a><a href="#p">Pricing</a><a href="#r">Reviews</a></div>
-<button class="btn"><span>Get a quote</span></button></div></nav>
-
-<div class="hero"><div class="w">
-<div><span class="tag">Residential &amp; light commercial</span>
-<h1>Power that <em>works</em> when you flip the switch.</h1>
-<p class="sub">Panel upgrades, EV chargers and rewires by licensed electricians who pull the permit, pass the inspection and clean up after.</p>
-<div class="acts"><button class="btn"><span>Get a quote</span></button><button class="btn d"><span>Call (312) 555-0158</span></button></div></div>
-<img src="${E[0]}" alt="">
-</div></div>
-
-<div class="badges">
-<div class="badge"><b>◆</b>Master licensed</div>
-<div class="badge"><b>◆</b>Permits pulled</div>
-<div class="badge"><b>◆</b>Flat-rate quotes</div>
-<div class="badge" style="border-right:0"><b>◆</b>5yr labour warranty</div>
-</div>
-
-<section id="s"><div class="w"><span class="eye">Capabilities</span><h2>Everything behind the drywall.</h2>
-<p class="lede">One licensed crew for the panel, the circuits and the paperwork.</p>
-<div class="cap">
-<div class="c"><b>01</b><h3>Panel upgrades</h3><p>100A to 200A service upgrades with the utility coordination handled for you.</p></div>
-<div class="c"><b>02</b><h3>EV chargers</h3><p>Level 2 installs, load calculation included, rebate forms filed on your behalf.</p></div>
-<div class="c"><b>03</b><h3>Rewires</h3><p>Knob-and-tube and aluminium replacement, room by room or whole house.</p></div>
-<div class="c"><b>04</b><h3>Troubleshooting</h3><p>Breakers that trip, outlets that die, lights that flicker — found and fixed.</p></div>
-</div></div></section>
-
-<section style="background:#FFFDF6"><div class="w split">
-<img src="${E[1]}" alt="">
-<div><span class="eye">How we work</span><h2>Quoted flat. Inspected clean.</h2>
-<p class="lede">You get the price before we start and the inspection report when we finish. No hourly creep, no surprise materials line.</p>
-<ul style="margin-top:22px;display:grid;gap:12px;font-size:15.5px">
-<li style="display:flex;gap:12px"><b style="color:#F2B21F">✓</b>Photos of every junction box we touch</li>
-<li style="display:flex;gap:12px"><b style="color:#F2B21F">✓</b>Permit and inspection booked by us</li>
-<li style="display:flex;gap:12px"><b style="color:#F2B21F">✓</b>Labelled panel schedule left on the door</li>
-<li style="display:flex;gap:12px"><b style="color:#F2B21F">✓</b>Five year warranty on all labour</li>
-</ul></div></div></section>
-
-<section id="p"><div class="w"><span class="eye">Pricing</span><h2>Straight numbers.</h2>
-<div class="tbl">
-<div class="tr"><div><h4>Service call</h4><p>Diagnosis and minor repair, waived if you book the work</p></div><b>$89</b></div>
-<div class="tr"><div><h4>EV charger install</h4><p>Level 2, up to 30ft run, permit included</p></div><b>from $1,450</b></div>
-<div class="tr"><div><h4>200A panel upgrade</h4><p>Utility coordination, permit and inspection included</p></div><b>from $2,900</b></div>
-<div class="tr"><div><h4>Whole-home rewire</h4><p>Quoted per room after a free on-site survey</p></div><b>Survey first</b></div>
-</div></div></section>
-
-<section id="r" class="rev"><div class="w"><span class="eye">Reviews</span><h2>318 five-star jobs.</h2>
-<div class="revs">
-<div class="rv"><div class="st">★★★★★</div><q>Panel upgrade done in a day, inspector signed it off same week, and the quote never moved.</q><div class="who"><img src="${F[0]}" alt="">Carlos M. · Logan Square</div></div>
-<div class="rv"><div class="st">★★★★★</div><q>They found a bad neutral two other electricians missed. Explained it so I actually understood.</q><div class="who"><img src="${F[1]}" alt="">Jenna P. · Berwyn</div></div>
-<div class="rv"><div class="st">★★★★★</div><q>EV charger installed and the rebate paperwork was already filled in when they left.</q><div class="who"><img src="${F[2]}" alt="">Ade O. · Oak Park</div></div>
-</div></div></section>
-
-<section class="end"><div class="w"><h2>Book an electrician this week.</h2>
-<p style="color:#C9C4B8;margin-top:14px;font-size:17px">Same-day emergency slots held every morning.</p>
-<div style="margin-top:26px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><button class="btn"><span>Get a quote</span></button><button class="btn" style="background:#fff"><span>(312) 555-0158</span></button></div></div></section>
-
-<footer><div class="w fb"><span>Bright Line Electric · IL Lic. 199-004821</span><span>Mon–Sat 7am–7pm · 24/7 emergency</span></div></footer>
-</body></html>`;
-
-/* ─────────────────────────  F · BRAMBLE & BONE DOG GROOMING
-   Layout: sage and coral, groom menu, photo gallery, pass card, booking form. */
-const bramble = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bramble &amp; Bone Dog Grooming</title>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<style>${RESET}
-body{font-family:'Nunito Sans',system-ui,sans-serif;color:#2C2A26;background:#FFF9F2;line-height:1.65}
-.w{max-width:1120px;margin:0 auto;padding:0 24px}
-nav{position:sticky;top:0;z-index:30;background:rgba(255,249,242,.95);backdrop-filter:blur(10px);border-bottom:1px solid #EFE2D2}
-.nb{display:flex;align-items:center;justify-content:space-between;height:78px;gap:20px}
-.bd{display:flex;align-items:center;gap:10px;font-family:'Baloo 2',cursive;font-weight:800;font-size:23px;color:#2F5D50}
-.bd s{width:36px;height:36px;border-radius:50%;background:#F2825B;color:#fff;display:grid;place-items:center;text-decoration:none;font-size:17px}
-.nl{display:flex;gap:24px;font-weight:600;font-size:15px;color:#6B6459}
-.nl a:hover{color:#2F5D50}
-.btn{display:inline-block;background:#F2825B;color:#fff;font-family:'Baloo 2',cursive;font-weight:700;font-size:16px;padding:12px 24px;border-radius:100px;border:0;cursor:pointer}
-.btn:hover{background:#E06D46}
-.btn.o{background:transparent;color:#2F5D50;border:2px solid #2F5D50}
-.hero{padding:64px 0 72px;position:relative;overflow:hidden}
-.blob{position:absolute;width:520px;height:520px;border-radius:50%;background:#DCEBD9;filter:blur(10px);opacity:.75;top:-160px;right:-120px}
-.hg{position:relative;z-index:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:center}
-.pill{display:inline-flex;gap:8px;align-items:center;background:#DCEBD9;color:#2F5D50;font-weight:700;font-size:13.5px;padding:8px 16px;border-radius:100px}
-h1{font-family:'Baloo 2',cursive;font-size:clamp(40px,5.8vw,64px);line-height:1.05;font-weight:800;color:#2F5D50;margin-top:18px}
-h1 em{font-style:normal;color:#F2825B}
-.sub{color:#6B6459;font-size:17.5px;margin-top:16px;max-width:42ch}
-.acts{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
-.hero img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:36px;border:6px solid #fff;box-shadow:0 26px 50px -26px rgba(47,93,80,.4)}
-.trust{display:flex;gap:26px;flex-wrap:wrap;margin-top:28px;font-size:14px;color:#6B6459;font-weight:600}
-.trust b{color:#F2825B}
-section{padding:76px 0}
-.eye{font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#8FAF86}
-h2{font-family:'Baloo 2',cursive;font-size:clamp(28px,4vw,44px);font-weight:800;color:#2F5D50;line-height:1.08;margin-top:8px}
-.lede{color:#6B6459;font-size:16.5px;margin-top:12px;max-width:54ch}
-.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;margin-top:40px}
-.mi{background:#fff;border:2px solid #EFE2D2;border-radius:24px;padding:28px}
-.mi:hover{border-color:#F2825B}
-.mi .ic{width:46px;height:46px;border-radius:50%;background:#FFEDE4;display:grid;place-items:center;font-size:21px}
-.mi h3{font-family:'Baloo 2',cursive;font-size:22px;color:#2F5D50;margin-top:14px}
-.mi p{color:#6B6459;font-size:15px;margin-top:8px}
-.mi .pr{margin-top:16px;font-weight:700;color:#F2825B;font-size:17px}
-.gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:38px}
-.gal img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:20px}
-.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:46px;align-items:center}
-.steps{display:grid;gap:16px;margin-top:24px}
-.stp{display:flex;gap:16px;align-items:flex-start;background:#fff;border-radius:18px;padding:18px 20px;border:1px solid #EFE2D2}
-.stp b{width:30px;height:30px;flex:0 0 30px;border-radius:50%;background:#2F5D50;color:#fff;display:grid;place-items:center;font-size:14px}
-.stp h4{font-family:'Baloo 2',cursive;font-size:18px;color:#2F5D50}
-.stp p{color:#6B6459;font-size:14.5px}
-.pass{background:#2F5D50;color:#fff;border-radius:28px;padding:44px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;align-items:center;margin-top:20px}
-.pass h3{font-family:'Baloo 2',cursive;font-size:30px}
-.pass ul{margin-top:14px;display:grid;gap:8px;font-size:15px;opacity:.88}
-.pass .price{text-align:center;background:rgba(255,255,255,.1);border-radius:20px;padding:26px}
-.pass .price b{display:block;font-family:'Baloo 2',cursive;font-size:46px}
-.book{background:#FFEDE4}
-.form{background:#fff;border-radius:26px;padding:34px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:32px;border:2px solid #F7D8C6}
-.form label{display:block;font-weight:700;font-size:13px;color:#6B6459;margin-bottom:7px}
-.form input,.form select{width:100%;border:1.5px solid #EFE2D2;border-radius:12px;padding:12px 14px;font-family:inherit;font-size:15px;background:#FFF9F2}
-.revs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:34px}
-.rv{background:#fff;border-radius:22px;padding:24px;border:1px solid #EFE2D2}
-.rv .st2{color:#F2B01E;letter-spacing:2px}
-.rv q{display:block;quotes:none;font-size:15.5px;margin:10px 0 14px}
-.rv .who{display:flex;gap:10px;align-items:center;font-size:13.5px;font-weight:700;color:#6B6459}
-.rv .who img{width:34px;height:34px;border-radius:50%;object-fit:cover}
-footer{background:#2F5D50;color:rgba(255,255,255,.75);padding:40px 0;font-size:14px}
-.fb{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-</style></head><body>
-<nav><div class="w nb"><div class="bd"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" style="flex:0 0 auto"><circle cx="16" cy="20.6" r="6.6" fill="#F2825B"/><circle cx="7.8" cy="12.6" r="3.4" fill="#F2825B"/><circle cx="14.1" cy="8.3" r="3.7" fill="#F2825B"/><circle cx="21" cy="9.3" r="3.4" fill="#F2825B"/><circle cx="26.4" cy="14.8" r="3" fill="#F2825B"/></svg>Bramble &amp; Bone</div>
-<div class="nl"><a href="#g">Grooms</a><a href="#h">How it works</a><a href="#b">Book</a></div>
-<button class="btn">Book a groom</button></div></nav>
-
-<div class="hero"><div class="blob"></div><div class="w hg">
-<div><span class="pill">Small studio · One dog at a time</span>
-<h1>A calm groom for <em>nervous</em> dogs.</h1>
-<p class="sub">No cages, no waiting-room chaos. Your dog gets the whole room, one groomer, and a text with photos when they are done.</p>
-<div class="acts"><button class="btn">Book a groom</button><button class="btn o">See the grooms</button></div>
-<div class="trust"><span><b>★ 4.9</b> · 260 reviews</span><span><b>·</b> Fear-free certified</span><span><b>·</b> Open Tue–Sat</span></div>
-</div>
-<img src="${G[0]}" alt="">
-</div></div>
-
-<section id="g"><div class="w"><span class="eye">The menu</span><h2>Four grooms, priced by coat.</h2>
-<p class="lede">Every groom includes a bath, blow-dry, nails, ears and a bandana on the way out.</p>
-<div class="menu">
-<div class="mi"><div class="ic">🛁</div><h3>Bath &amp; tidy</h3><p>Wash, dry, nails and a light face-and-feet trim. Good between full grooms.</p><div class="pr">from $48</div></div>
-<div class="mi"><div class="ic">✂️</div><h3>Full groom</h3><p>Clip or scissor to your breed standard, or whatever length actually suits your week.</p><div class="pr">from $75</div></div>
-<div class="mi"><div class="ic">🌿</div><h3>De-shed treatment</h3><p>Deep coat work for huskies, labs and anything that redecorates your sofa.</p><div class="pr">from $85</div></div>
-<div class="mi"><div class="ic">🐶</div><h3>Puppy first visit</h3><p>Thirty gentle minutes: handling, water, dryer sounds and a lot of treats.</p><div class="pr">$35</div></div>
-</div>
-<div class="gal"><img src="${G[1]}" alt=""><img src="${G[2]}" alt=""><img src="${G[0]}" alt=""><img src="${G[2]}" alt=""></div>
-</div></section>
-
-<section id="h" style="background:#DCEBD9"><div class="w split">
-<div><span class="eye">How it works</span><h2>Drop off, get photos, pick up.</h2>
-<div class="steps">
-<div class="stp"><b>1</b><div><h4>Book a slot</h4><p>Pick a time online. We only run three dogs a day, so the slots are real.</p></div></div>
-<div class="stp"><b>2</b><div><h4>Tell us the dog</h4><p>Anxious, arthritic, hates the dryer — we plan the groom around it.</p></div></div>
-<div class="stp"><b>3</b><div><h4>Photo update</h4><p>You get a text mid-groom so you know how they are settling.</p></div></div>
-<div class="stp"><b>4</b><div><h4>Home smelling great</h4><p>Pick up within the hour, next appointment booked before you leave.</p></div></div>
-</div></div>
-<img src="${G[1]}" alt="" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:32px;border:6px solid #fff">
-</div></section>
-
-<section><div class="w"><span class="eye">Regulars</span><h2>The grooming pass.</h2>
-<div class="pass">
-<div><h3>Six grooms, one price.</h3>
-<ul><li>· Save $60 over single bookings</li><li>· Priority Saturday slots</li><li>· Free nail trims between visits</li><li>· Shareable across two dogs</li></ul></div>
-<div class="price"><b>$390</b><span>six full grooms · no expiry</span><div style="margin-top:16px"><button class="btn">Get the pass</button></div></div>
-</div></div></section>
-
-<section style="background:#FFF3E6"><div class="w"><span class="eye">Reviews</span><h2>Dogs who forgave us.</h2>
-<div class="revs">
-<div class="rv"><div class="st2">★★★★★</div><q>Our rescue used to shake for hours after grooming. Here he falls asleep on the table.</q><div class="who"><img src="${F[1]}" alt="">Sofia D. · Ravenswood</div></div>
-<div class="rv"><div class="st2">★★★★★</div><q>They text photos halfway through, which is the nicest thing anyone has done for my anxiety.</q><div class="who"><img src="${F[2]}" alt="">Mark T. · Andersonville</div></div>
-<div class="rv"><div class="st2">★★★★★</div><q>Best de-shed in the city. My car has never recovered but the sofa has.</q><div class="who"><img src="${F[0]}" alt="">Priya N. · Uptown</div></div>
-</div></div></section>
-
-<section id="b" class="book"><div class="w"><span class="eye">Book</span><h2>Find a slot this week.</h2>
-<div class="form">
-<div><label>Your name</label><input placeholder="Your name"></div>
-<div><label>Dog's name &amp; breed</label><input placeholder="Nala · cockapoo"></div>
-<div><label>Groom</label><select><option>Bath &amp; tidy</option><option>Full groom</option><option>De-shed treatment</option><option>Puppy first visit</option></select></div>
-<div style="display:flex;align-items:flex-end"><button class="btn" style="width:100%">Request a slot</button></div>
-</div></div></section>
-
-<footer><div class="w fb"><span>Bramble &amp; Bone Dog Grooming</span><span>Tue–Sat · 8am–5pm</span><span>(312) 555-0166</span></div></footer>
-</body></html>`;
-
-/* ─────────────────────────  G · COPPER & COAT PAINTING
-   Layout: warm clay palette, colour-swatch strip, before/after, room pricing. */
-const coppercoat = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Copper &amp; Coat Painting</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
-<style>${RESET}
-body{font-family:'Karla',system-ui,sans-serif;color:#2A211B;background:#FBF6F0;line-height:1.65}
-.w{max-width:1120px;margin:0 auto;padding:0 24px}
-nav{position:sticky;top:0;z-index:30;background:rgba(251,246,240,.94);backdrop-filter:blur(10px);border-bottom:1px solid #E8DACB}
-.nb{display:flex;align-items:center;justify-content:space-between;height:80px;gap:20px}
-.bd{display:flex;align-items:center;gap:11px;font-family:'Fraunces',serif;font-weight:700;font-size:23px;color:#8C4A2F}
-.bd s{width:30px;height:30px;border-radius:8px;background:#C2603B;text-decoration:none}
-.nl{display:flex;gap:26px;font-size:15px;color:#6E5B4E}
-.nl a:hover{color:#8C4A2F}
-.btn{display:inline-block;background:#8C4A2F;color:#FBF6F0;font-weight:700;font-size:15px;padding:13px 24px;border-radius:6px;border:0;cursor:pointer}
-.btn:hover{background:#733A22}
-.btn.o{background:transparent;color:#8C4A2F;border:1.5px solid #C9AE97}
-.hero{padding:72px 0 68px}
-.hg{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:center}
-.tag{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#B07C4F}
-h1{font-family:'Fraunces',serif;font-size:clamp(40px,5.8vw,66px);line-height:1.03;font-weight:700;margin-top:14px}
-h1 em{font-style:italic;color:#C2603B}
-.sub{color:#6E5B4E;font-size:17.5px;margin-top:16px;max-width:44ch}
-.acts{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
-.hero img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:14px}
-.sw{display:flex;gap:0;margin-top:34px;border-radius:8px;overflow:hidden;max-width:340px}
-.sw span{flex:1;height:36px}
-.strip{border-top:1px solid #E8DACB;border-bottom:1px solid #E8DACB;background:#F5EBE0}
-.strip .w{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;padding:26px 24px;font-size:14.5px;color:#6E5B4E}
-.strip b{display:block;font-family:'Fraunces',serif;font-size:24px;color:#2A211B}
-section{padding:78px 0}
-.eye{font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#B07C4F}
-h2{font-family:'Fraunces',serif;font-size:clamp(28px,4.2vw,46px);font-weight:700;line-height:1.06;margin-top:8px}
-.lede{color:#6E5B4E;font-size:16.5px;margin-top:12px;max-width:54ch}
-.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:38px}
-.s{background:#fff;border:1px solid #EADCCD;border-radius:14px;padding:26px}
-.s:hover{box-shadow:0 18px 40px -28px rgba(140,74,47,.55)}
-.s h3{font-family:'Fraunces',serif;font-size:22px}
-.s p{color:#6E5B4E;font-size:15px;margin-top:8px}
-.s .pr{margin-top:16px;font-weight:700;color:#8C4A2F}
-.ba{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:38px}
-.ba figure{border-radius:14px;overflow:hidden;position:relative}
-.ba img{width:100%;aspect-ratio:4/3;object-fit:cover}
-.ba figcaption{position:absolute;left:14px;top:14px;background:rgba(42,33,27,.82);color:#FBF6F0;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:100px}
-.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:46px;align-items:center}
-.split img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:14px}
-.steps{display:grid;gap:14px;margin-top:22px}
-.stp{display:flex;gap:14px;align-items:flex-start}
-.stp b{width:28px;height:28px;flex:0 0 28px;border-radius:50%;background:#C2603B;color:#fff;display:grid;place-items:center;font-size:13px}
-.stp h4{font-weight:700;font-size:16.5px}
-.stp p{color:#6E5B4E;font-size:15px}
-.revs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:34px}
-.rv{background:#fff;border:1px solid #EADCCD;border-radius:14px;padding:24px}
-.rv .st{color:#E0A33C;letter-spacing:2px}
-.rv q{display:block;quotes:none;font-size:15.5px;margin:10px 0 14px}
-.rv .who{display:flex;gap:10px;align-items:center;font-size:13.5px;font-weight:700;color:#6E5B4E}
-.rv .who img{width:34px;height:34px;border-radius:50%;object-fit:cover}
-.end{background:#2A211B;color:#FBF6F0;text-align:center}
-.end h2{color:#FBF6F0}
-footer{background:#221B16;color:#A2907F;padding:38px 0;font-size:13.5px}
-.fb{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-</style></head><body>
-<nav><div class="w nb"><div class="bd"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true" style="flex:0 0 auto"><circle cx="16" cy="16" r="15" fill="#C2603B"/><path d="M7 24.5c2.6-9.4 8.2-15 17.2-16.6" stroke="#FBF6F0" stroke-width="3" fill="none" stroke-linecap="round"/><rect x="5.2" y="21" width="7.6" height="5.2" rx="1.6" fill="#FBF6F0"/></svg>Copper &amp; Coat</div>
-<div class="nl"><a href="#s">Services</a><a href="#work">Recent work</a><a href="#p">Process</a></div>
-<button class="btn">Free colour consult</button></div></nav>
-
-<div class="hero"><div class="w hg">
-<div><span class="tag">Interior &amp; exterior painting</span>
-<h1>Paint that still looks new in <em>year five</em>.</h1>
-<p class="sub">Two coats, proper prep, and crews who mask, sand and caulk before a brush ever touches your wall.</p>
-<div class="acts"><button class="btn">Get a free quote</button><button class="btn o">See recent work</button></div>
-<div class="sw"><span style="background:#8C4A2F"></span><span style="background:#C2603B"></span><span style="background:#E0A33C"></span><span style="background:#7C8F6B"></span><span style="background:#3F5468"></span></div>
-</div>
-<img src="${P[2]}" alt="">
-</div></div>
-
-<div class="strip"><div class="w">
-<div><b>14 yrs</b>painting Chicagoland homes</div>
-<div><b>2 coats</b>always, never one</div>
-<div><b>5 yr</b>written workmanship warranty</div>
-<div><b>4.9★</b>across 180 reviews</div>
-</div></div>
-
-<section id="s"><div class="w"><span class="eye">Services</span><h2>What we paint.</h2>
-<p class="lede">Prep is most of the job. It is also most of the reason cheap paint jobs fail.</p>
-<div class="svc">
-<div class="s"><h3>Interior repaint</h3><p>Walls, trim and ceilings. Furniture wrapped, floors covered, rooms put back each night.</p><div class="pr">from $420 / room</div></div>
-<div class="s"><h3>Exterior repaint</h3><p>Pressure wash, scrape, prime and two finish coats rated for Midwest winters.</p><div class="pr">from $3,900</div></div>
-<div class="s"><h3>Cabinet refinishing</h3><p>Sprayed in a dust-controlled setup for a factory-smooth finish, no brush marks.</p><div class="pr">from $2,400</div></div>
-<div class="s"><h3>Drywall repair</h3><p>Cracks, nail pops and water stains patched and blended before we paint.</p><div class="pr">from $180</div></div>
-</div></div></section>
-
-<section id="work" style="background:#F5EBE0"><div class="w"><span class="eye">Recent work</span><h2>Rooms we finished this month.</h2>
-<div class="ba">
-<figure><img src="${P[0]}" alt=""><figcaption>Interior · Oak Park</figcaption></figure>
-<figure><img src="${P[1]}" alt=""><figcaption>Exterior · Berwyn</figcaption></figure>
-<figure><img src="${P[2]}" alt=""><figcaption>Living room · Logan Square</figcaption></figure>
-</div></div></section>
-
-<section id="p"><div class="w split">
-<img src="${P[1]}" alt="">
-<div><span class="eye">Process</span><h2>Four visits, no surprises.</h2>
-<div class="steps">
-<div class="stp"><b>1</b><div><h4>Walkthrough &amp; quote</h4><p>Measured on site, priced per room, emailed the same day.</p></div></div>
-<div class="stp"><b>2</b><div><h4>Colour consult</h4><p>Free hour with our colour lead, samples painted on your actual wall.</p></div></div>
-<div class="stp"><b>3</b><div><h4>Prep &amp; paint</h4><p>Mask, sand, caulk, prime, two coats. Photos sent at the end of each day.</p></div></div>
-<div class="stp"><b>4</b><div><h4>Punch list</h4><p>We walk it with you and fix every mark before the final invoice.</p></div></div>
-</div></div></section>
-
-<section style="background:#F5EBE0"><div class="w"><span class="eye">Reviews</span><h2>What homeowners say.</h2>
-<div class="revs">
-<div class="rv"><div class="st">★★★★★</div><q>They spent a day and a half on prep alone. You can see it in the trim lines.</q><div class="who"><img src="${F[0]}" alt="">Danielle R. · Oak Park</div></div>
-<div class="rv"><div class="st">★★★★★</div><q>Cabinets look sprayed in a factory. No brush marks anywhere.</q><div class="who"><img src="${F[1]}" alt="">Tomas L. · Berwyn</div></div>
-<div class="rv"><div class="st">★★★★★</div><q>Quote came in the same evening and the final invoice matched it exactly.</q><div class="who"><img src="${F[2]}" alt="">Grace H. · Elmhurst</div></div>
-</div></div></section>
-
-<section class="end"><div class="w"><h2>Book your free colour consult.</h2>
-<p style="color:#C9B7A6;margin-top:14px;font-size:17px">Quotes returned within 24 hours, every time.</p>
-<div style="margin-top:26px"><button class="btn" style="background:#C2603B">Get a free quote</button></div></div></section>
-
-<footer><div class="w fb"><span>Copper &amp; Coat Painting · Fully insured</span><span>Mon–Sat 7am–6pm</span><span>(312) 555-0184</span></div></footer>
-</body></html>`;
-
-/* ─────────────────────────  H · IRONLINE CONCRETE & MASONRY
-   Layout: heavy industrial slab type, spec table, project grid, quote band.  */
-const ironline = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ironline Concrete &amp; Masonry</title>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>${RESET}
-body{font-family:'Archivo',system-ui,sans-serif;color:#1A1C1E;background:#F2F1EE;line-height:1.6}
-.w{max-width:1160px;margin:0 auto;padding:0 24px}
-nav{position:sticky;top:0;z-index:30;background:#1A1C1E;color:#fff}
-.nb{display:flex;align-items:center;justify-content:space-between;height:74px;gap:20px}
-.bd{display:flex;align-items:center;gap:10px;font-family:'Archivo Black',sans-serif;font-size:20px;letter-spacing:-.02em;text-transform:uppercase}
-.bd i{color:#E7A13A;font-style:normal}
-.nl{display:flex;gap:24px;font-size:14.5px;color:#A9AEB4}
-.nl a:hover{color:#fff}
-.btn{display:inline-block;background:#E7A13A;color:#1A1C1E;font-weight:700;font-size:14.5px;padding:13px 22px;border:0;border-radius:3px;cursor:pointer}
-.btn:hover{background:#D08E2C}
-.btn.g{background:#fff}
-.btn.o{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.3)}
-.hero{position:relative;background:#1A1C1E;color:#fff;overflow:hidden}
-.hero img.bgi{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.34}
-.hero .w{position:relative;z-index:2;padding:112px 24px 96px}
-.tag{display:inline-block;border:1px solid rgba(255,255,255,.28);font-size:12px;letter-spacing:.18em;text-transform:uppercase;padding:7px 14px;border-radius:3px}
-h1{font-family:'Archivo Black',sans-serif;font-size:clamp(44px,7.4vw,88px);line-height:.94;text-transform:uppercase;letter-spacing:-.02em;margin-top:20px;max-width:15ch}
-h1 i{color:#E7A13A;font-style:normal}
-.sub{color:#C3C7CB;font-size:18px;margin-top:18px;max-width:48ch}
-.acts{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
-.spec{background:#1A1C1E;border-top:1px solid #33373B}
-.spec .w{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;padding:0 24px}
-.sp{padding:26px 0;color:#A9AEB4;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
-.sp b{display:block;font-family:'Archivo Black',sans-serif;font-size:32px;color:#fff;letter-spacing:-.02em;margin-bottom:4px}
-section{padding:82px 0}
-.eye{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#8A6A2F}
-h2{font-family:'Archivo Black',sans-serif;font-size:clamp(30px,4.6vw,50px);text-transform:uppercase;line-height:1;letter-spacing:-.02em;margin-top:10px}
-.lede{color:#5A6067;font-size:16.5px;margin-top:12px;max-width:56ch}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px;margin-top:40px;background:#D8D6D1}
-.g{background:#F2F1EE;padding:30px 26px}
-.g b{font-family:'Archivo Black',sans-serif;font-size:13px;color:#E7A13A;letter-spacing:.1em}
-.g h3{font-size:21px;font-weight:700;margin-top:10px}
-.g p{color:#5A6067;font-size:15px;margin-top:8px}
-.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:38px}
-.pg{position:relative;overflow:hidden}
-.pg img{width:100%;aspect-ratio:4/3;object-fit:cover}
-.pg span{position:absolute;left:0;bottom:0;background:#1A1C1E;color:#fff;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:9px 16px}
-.tbl{margin-top:36px;background:#fff;border:1px solid #DDDAD4}
-.tr{display:grid;grid-template-columns:1fr auto;gap:20px;padding:20px 24px;border-bottom:1px solid #EDEBE7;align-items:baseline}
-.tr:last-child{border-bottom:0}
-.tr h4{font-weight:700;font-size:17.5px}
-.tr p{color:#5A6067;font-size:14.5px}
-.tr b{font-family:'Archivo Black',sans-serif;font-size:20px;white-space:nowrap}
-.revs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:36px}
-.rv{background:#fff;border:1px solid #DDDAD4;padding:24px}
-.rv .st{color:#E7A13A;letter-spacing:2px}
-.rv q{display:block;quotes:none;font-size:15.5px;margin:10px 0 14px}
-.rv .who{display:flex;gap:10px;align-items:center;font-size:13.5px;font-weight:700;color:#5A6067}
-.rv .who img{width:34px;height:34px;border-radius:50%;object-fit:cover}
-.band{background:#E7A13A;color:#1A1C1E;text-align:center}
-footer{background:#141618;color:#7E858C;padding:40px 0;font-size:13.5px}
-.fb{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-</style></head><body>
-<nav><div class="w nb"><div class="bd"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" style="flex:0 0 auto"><path d="M16 3 30 9.5 16 16 2 9.5 16 3Z" fill="#E7A13A"/><path d="M2 12.5 16 19l14-6.5v3.8L16 22.8 2 16.3v-3.8Z" fill="#1A1C1E"/><path d="M2 19.4 16 25.9l14-6.5v3.8L16 29.7 2 23.2v-3.8Z" fill="#E7A13A"/></svg>Iron<i>line</i></div>
-<div class="nl"><a href="#s">Scope</a><a href="#pr">Projects</a><a href="#c">Pricing</a></div>
-<button class="btn">Request a bid</button></div></nav>
-
-<div class="hero"><img class="bgi" src="${C[1]}" alt=""><div class="w">
-<span class="tag">Flatwork · Masonry · Foundations</span>
-<h1>Concrete poured <i>level</i>, laid to last.</h1>
-<p class="sub">Driveways, patios and retaining walls for Chicago homes and small commercial sites. Rebar where it belongs and a finish that drains right.</p>
-<div class="acts"><button class="btn">Request a bid</button><button class="btn o">See projects</button></div>
-</div></div>
-
-<div class="spec"><div class="w">
-<div class="sp"><b>4,000</b>psi standard mix</div>
-<div class="sp"><b>18 yrs</b>pouring in Cook County</div>
-<div class="sp"><b>10 yr</b>structural warranty</div>
-<div class="sp"><b>2 wk</b>typical lead time</div>
-</div></div>
-
-<section id="s"><div class="w"><span class="eye">Scope</span><h2>What we pour.</h2>
-<p class="lede">Every pour is sub-base compacted, formed square and cured properly. That is why they do not crack in year two.</p>
-<div class="grid">
-<div class="g"><b>01</b><h3>Driveways</h3><p>Tear-out, grade, rebar, 4,000psi pour with control joints cut on schedule.</p></div>
-<div class="g"><b>02</b><h3>Patios &amp; stamped</h3><p>Broom, exposed aggregate or stamped patterns sealed for winter.</p></div>
-<div class="g"><b>03</b><h3>Retaining walls</h3><p>Block or natural stone with drainage tile behind it, engineered above 4ft.</p></div>
-<div class="g"><b>04</b><h3>Foundation repair</h3><p>Underpinning, crack injection and garage slab replacement.</p></div>
-</div></div></section>
-
-<section id="pr" style="background:#E9E7E2"><div class="w"><span class="eye">Projects</span><h2>Recent pours.</h2>
-<div class="pgrid">
-<div class="pg"><img src="${C[0]}" alt=""><span>Driveway · Portage Park</span></div>
-<div class="pg"><img src="${C[1]}" alt=""><span>Stamped patio · Oak Lawn</span></div>
-<div class="pg"><img src="${C[2]}" alt=""><span>Stone wall · Evanston</span></div>
-</div></div></section>
-
-<section id="c"><div class="w"><span class="eye">Pricing</span><h2>Bid ranges.</h2>
-<p class="lede">Firm numbers after a site visit. These are what most jobs land at.</p>
-<div class="tbl">
-<div class="tr"><div><h4>Driveway replacement</h4><p>Tear-out, haul-off, 6in reinforced slab</p></div><b>$9–14 / sq ft</b></div>
-<div class="tr"><div><h4>Stamped patio</h4><p>Pattern, colour and sealer included</p></div><b>$16–22 / sq ft</b></div>
-<div class="tr"><div><h4>Retaining wall</h4><p>Block wall with drainage, per face foot</p></div><b>$38–60</b></div>
-<div class="tr"><div><h4>Crack injection</h4><p>Poured foundation, per crack</p></div><b>from $550</b></div>
-</div></div></section>
-
-<section style="background:#E9E7E2"><div class="w"><span class="eye">Reviews</span><h2>Homeowners &amp; GCs.</h2>
-<div class="revs">
-<div class="rv"><div class="st">★★★★★</div><q>Third winter on the driveway and there is not a single crack or heave.</q><div class="who"><img src="${F[1]}" alt="">Rick D. · Portage Park</div></div>
-<div class="rv"><div class="st">★★★★★</div><q>They compacted the base properly instead of pouring on dirt like the last guys.</q><div class="who"><img src="${F[2]}" alt="">Alina S. · Oak Lawn</div></div>
-<div class="rv"><div class="st">★★★★★</div><q>We sub all our flatwork to Ironline now. Bids are honest and the crew is clean.</q><div class="who"><img src="${F[0]}" alt="">Marcus B. · GC, Evanston</div></div>
-</div></div></section>
-
-<section class="band"><div class="w"><h2>Book a site visit.</h2>
-<p style="margin-top:12px;font-size:17px">Bids returned in 48 hours with a scope sheet, not a napkin number.</p>
-<div style="margin-top:24px"><button class="btn" style="background:#1A1C1E;color:#fff">Request a bid</button></div></div></section>
-
-<footer><div class="w fb"><span>Ironline Concrete &amp; Masonry · Licensed &amp; bonded</span><span>Mon–Fri 6am–4pm</span><span>(312) 555-0192</span></div></footer>
-</body></html>`;
-
-/* ─────────────────────────  I · OVERHEAD GARAGE DOOR CO.
-   Layout: blue utility brand, emergency band, symptom finder, door catalogue. */
-const overhead = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Overhead Garage Door Co.</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
-<style>${RESET}
-body{font-family:'Manrope',system-ui,sans-serif;color:#101B2B;background:#fff;line-height:1.62}
-.w{max-width:1140px;margin:0 auto;padding:0 24px}
-.top{background:#0E2E5C;color:#CFE0F7;font-size:13.5px}
-.top .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:9px 24px}
-.top b{color:#fff}
-nav{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid #E3E9F2;box-shadow:0 6px 24px -20px rgba(16,27,43,.6)}
-.nb{display:flex;align-items:center;justify-content:space-between;height:78px;gap:20px}
-.bd{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:-.02em;color:#0E2E5C}
-.bd s{width:32px;height:32px;border-radius:6px;background:#1B6CF2;text-decoration:none}
-.nl{display:flex;gap:24px;font-size:15px;color:#54627A}
-.nl a:hover{color:#0E2E5C}
-.btn{display:inline-block;background:#1B6CF2;color:#fff;font-weight:700;font-size:15px;padding:13px 24px;border-radius:8px;border:0;cursor:pointer}
-.btn:hover{background:#1558CB}
-.btn.o{background:#EDF3FE;color:#0E2E5C}
-.hero{background:linear-gradient(180deg,#F4F8FF,#fff);padding:66px 0 64px}
-.hg{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:46px;align-items:center}
-.pill{display:inline-flex;gap:8px;align-items:center;background:#E4EFFF;color:#1B6CF2;font-weight:700;font-size:13px;padding:7px 14px;border-radius:100px}
-h1{font-size:clamp(38px,5.4vw,62px);line-height:1.04;font-weight:800;letter-spacing:-.03em;margin-top:16px}
-.sub{color:#54627A;font-size:17.5px;margin-top:15px;max-width:44ch}
-.acts{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
-.hero img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;box-shadow:0 30px 60px -34px rgba(14,46,92,.5)}
-.trust{display:flex;gap:24px;flex-wrap:wrap;margin-top:26px;font-size:14px;color:#54627A;font-weight:600}
-.trust b{color:#1B6CF2}
-section{padding:76px 0}
-.eye{font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7B93B5}
-h2{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.03em;line-height:1.08;margin-top:8px}
-.lede{color:#54627A;font-size:16.5px;margin-top:12px;max-width:54ch}
-.sym{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:36px}
-.sy{border:1px solid #E3E9F2;border-radius:14px;padding:22px;background:#fff}
-.sy:hover{border-color:#1B6CF2;background:#F7FAFF}
-.sy h3{font-size:17.5px;font-weight:700}
-.sy p{color:#54627A;font-size:14.5px;margin-top:6px}
-.sy .fix{margin-top:14px;font-size:13.5px;font-weight:700;color:#1B6CF2}
-.cat{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:38px}
-.cd{border:1px solid #E3E9F2;border-radius:16px;overflow:hidden;background:#fff}
-.cd img{width:100%;aspect-ratio:4/3;object-fit:cover}
-.cd div{padding:20px}
-.cd h3{font-size:19px;font-weight:800}
-.cd p{color:#54627A;font-size:14.5px;margin-top:6px}
-.cd b{display:block;margin-top:14px;color:#0E2E5C;font-size:17px}
-.band{background:#0E2E5C;color:#fff}
-.band .w{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px;align-items:center;padding:52px 24px}
-.band h3{font-size:27px;font-weight:800;letter-spacing:-.02em}
-.band p{color:#B9CEEA;margin-top:8px}
-.revs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:34px}
-.rv{border:1px solid #E3E9F2;border-radius:14px;padding:22px}
-.rv .st{color:#F0A32B;letter-spacing:2px}
-.rv q{display:block;quotes:none;font-size:15.5px;margin:10px 0 14px}
-.rv .who{display:flex;gap:10px;align-items:center;font-size:13.5px;font-weight:700;color:#54627A}
-.rv .who img{width:34px;height:34px;border-radius:50%;object-fit:cover}
-footer{background:#0B2246;color:#8FA9CC;padding:38px 0;font-size:13.5px}
-.fb{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-</style></head><body>
-<div class="top"><div class="w"><span><b>Same-day repair</b> · 7 days a week</span><span>(312) 555-0173</span></div></div>
-<nav><div class="w nb"><div class="bd"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true" style="flex:0 0 auto"><path d="M3 29.5V15.5a13 13 0 0 1 26 0v14H3Z" fill="#1B6CF2"/><rect x="8" y="13" width="16" height="3" rx="1.2" fill="#fff"/><rect x="8" y="18" width="16" height="3" rx="1.2" fill="#fff" opacity=".85"/><rect x="8" y="23" width="16" height="3" rx="1.2" fill="#fff" opacity=".7"/></svg>Overhead Garage Door Co.</div>
-<div class="nl"><a href="#r">Repairs</a><a href="#d">New doors</a><a href="#rev">Reviews</a></div>
-<button class="btn">Book a tech</button></div></nav>
-
-<div class="hero"><div class="w hg">
-<div><span class="pill">Springs · Openers · New doors</span>
-<h1>Door stuck? A tech can be there today.</h1>
-<p class="sub">Broken springs, dead openers and off-track doors fixed in one visit, with the part on the truck.</p>
-<div class="acts"><button class="btn">Book a tech</button><button class="btn o">Call (312) 555-0173</button></div>
-<div class="trust"><span><b>★ 4.9</b> · 410 reviews</span><span><b>·</b> 2hr arrival window</span><span><b>·</b> Parts stocked</span></div>
-</div>
-<img src="${D[0]}" alt="">
-</div></div>
-
-<section id="r"><div class="w"><span class="eye">Repairs</span><h2>Tell us what it's doing.</h2>
-<p class="lede">Most repairs are one of these four, and most are done inside an hour.</p>
-<div class="sym">
-<div class="sy"><h3>Loud bang, won't lift</h3><p>Torsion spring snapped. The door is now too heavy for the opener.</p><div class="fix">Spring pair from $265</div></div>
-<div class="sy"><h3>Opener hums, door stays</h3><p>Stripped gear or a failed logic board in the motor head.</p><div class="fix">Repair from $180</div></div>
-<div class="sy"><h3>Door off its track</h3><p>Bent track or broken roller, usually after a bump from a bumper.</p><div class="fix">Realign from $210</div></div>
-<div class="sy"><h3>Reverses on its own</h3><p>Misaligned safety sensors or a limit setting drifting out of range.</p><div class="fix">Tune-up $119</div></div>
-</div></div></section>
-
-<section id="d" style="background:#F5F8FD"><div class="w"><span class="eye">New doors</span><h2>Doors we install.</h2>
-<div class="cat">
-<div class="cd"><img src="${D[2]}" alt=""><div><h3>Steel insulated</h3><p>R-16 double-layer steel, the workhorse for Midwest garages.</p><b>from $1,690 installed</b></div></div>
-<div class="cd"><img src="${D[0]}" alt=""><div><h3>Carriage house</h3><p>Overlay carriage look on a modern sectional door with windows.</p><b>from $2,450 installed</b></div></div>
-<div class="cd"><img src="${D[1]}" alt=""><div><h3>Smart opener</h3><p>Belt-drive, battery backup and phone control that actually works.</p><b>from $640 installed</b></div></div>
-</div></div></section>
-
-<div class="band"><div class="w">
-<div><h3>Spring broke on a Sunday?</h3><p>We run a weekend crew. Same-day slots, no holiday surcharge.</p></div>
-<div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end"><button class="btn">Book a tech</button><button class="btn" style="background:#fff;color:#0E2E5C">(312) 555-0173</button></div>
-</div></div>
-
-<section id="rev"><div class="w"><span class="eye">Reviews</span><h2>410 five-star calls.</h2>
-<div class="revs">
-<div class="rv"><div class="st">★★★★★</div><q>Called at 9, fixed by 12, and he showed me the old spring and why it went.</q><div class="who"><img src="${F[2]}" alt="">Hannah W. · Norwood Park</div></div>
-<div class="rv"><div class="st">★★★★★</div><q>Quoted a new opener, then said mine only needed a gear kit. Saved me $400.</q><div class="who"><img src="${F[0]}" alt="">Derek A. · Skokie</div></div>
-<div class="rv"><div class="st">★★★★★</div><q>New carriage door looks better than the render. Install was three hours.</q><div class="who"><img src="${F[1]}" alt="">Nina C. · Park Ridge</div></div>
-</div></div></section>
-
-<footer><div class="w fb"><span>Overhead Garage Door Co. · IL Lic. 104-9982</span><span>7 days · 7am–8pm</span><span>(312) 555-0173</span></div></footer>
-</body></html>`;
-
-/* ─────────────────────────  J · CLEARVIEW WINDOW & SIDING
-   Layout: calm green/white, savings figures, product rows, financing card.   */
-const clearview = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Clearview Window &amp; Siding</title>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
-<style>${RESET}
-body{font-family:'Inter Tight',system-ui,sans-serif;color:#14231D;background:#fff;line-height:1.62}
-.w{max-width:1140px;margin:0 auto;padding:0 24px}
-nav{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid #E4EBE7}
-.nb{display:flex;align-items:center;justify-content:space-between;height:80px;gap:20px}
-.bd{display:flex;align-items:center;gap:10px;font-family:'Sora',sans-serif;font-weight:700;font-size:20px;letter-spacing:-.02em;color:#1D5C46}
-.bd s{width:30px;height:30px;border-radius:50%;background:#2E8B65;text-decoration:none}
-.nl{display:flex;gap:24px;font-size:15px;color:#5B6E66}
-.nl a:hover{color:#1D5C46}
-.btn{display:inline-block;background:#1D5C46;color:#fff;font-weight:600;font-size:15px;padding:13px 24px;border-radius:6px;border:0;cursor:pointer}
-.btn:hover{background:#16472F}
-.btn.o{background:#EAF3EE;color:#1D5C46}
-.hero{padding:64px 0 60px;background:linear-gradient(180deg,#F3F8F5,#fff)}
-.hg{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:46px;align-items:center}
-.pill{display:inline-block;background:#DFEFE6;color:#1D5C46;font-weight:600;font-size:13px;padding:7px 14px;border-radius:100px}
-h1{font-family:'Sora',sans-serif;font-size:clamp(38px,5.2vw,60px);line-height:1.06;font-weight:700;letter-spacing:-.03em;margin-top:16px}
-.sub{color:#5B6E66;font-size:17.5px;margin-top:15px;max-width:45ch}
-.acts{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
-.hero img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:14px}
-.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px;margin-top:32px;border-top:1px solid #DCE7E1;padding-top:22px}
-.figs b{display:block;font-family:'Sora',sans-serif;font-size:26px;color:#1D5C46}
-.figs span{font-size:13.5px;color:#5B6E66}
-section{padding:76px 0}
-.eye{font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#7FA394}
-h2{font-family:'Sora',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:700;letter-spacing:-.03em;line-height:1.08;margin-top:8px}
-.lede{color:#5B6E66;font-size:16.5px;margin-top:12px;max-width:54ch}
-.rows{margin-top:38px;display:grid;gap:18px}
-.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px;align-items:center;border:1px solid #E4EBE7;border-radius:16px;overflow:hidden;background:#fff}
-.row img{width:100%;height:100%;min-height:230px;object-fit:cover}
-.row .tx{padding:30px}
-.row h3{font-family:'Sora',sans-serif;font-size:23px;font-weight:700}
-.row p{color:#5B6E66;font-size:15.5px;margin-top:10px}
-.row ul{margin-top:14px;display:grid;gap:8px;font-size:14.5px;color:#3C4F47}
-.row li{display:flex;gap:10px}
-.row li b{color:#2E8B65}
-.row .pr{margin-top:16px;font-weight:600;color:#1D5C46}
-.fin{background:#1D5C46;color:#fff;border-radius:18px;padding:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:30px;align-items:center;margin-top:20px}
-.fin h3{font-family:'Sora',sans-serif;font-size:28px;font-weight:700}
-.fin p{color:#BFDACD;margin-top:10px;font-size:15.5px}
-.fin .card{background:rgba(255,255,255,.1);border-radius:14px;padding:26px;text-align:center}
-.fin .card b{display:block;font-family:'Sora',sans-serif;font-size:40px}
-.revs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:34px}
-.rv{border:1px solid #E4EBE7;border-radius:14px;padding:22px}
-.rv .st{color:#E0A93F;letter-spacing:2px}
-.rv q{display:block;quotes:none;font-size:15.5px;margin:10px 0 14px}
-.rv .who{display:flex;gap:10px;align-items:center;font-size:13.5px;font-weight:600;color:#5B6E66}
-.rv .who img{width:34px;height:34px;border-radius:50%;object-fit:cover}
-.end{background:#F3F8F5;text-align:center}
-footer{background:#12271F;color:#8FAB9E;padding:38px 0;font-size:13.5px}
-.fb{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-</style></head><body>
-<nav><div class="w nb"><div class="bd"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" style="flex:0 0 auto"><path d="M16 1.5 30.5 16 16 30.5 1.5 16 16 1.5Z" fill="#2E8B65"/><path d="M16 6.8 25.2 16 16 25.2 6.8 16 16 6.8Z" stroke="#fff" stroke-width="1.9" fill="none"/><path d="M16 6.8v18.4M6.8 16h18.4" stroke="#fff" stroke-width="1.9"/></svg>Clearview Window &amp; Siding</div>
-<div class="nl"><a href="#p">Products</a><a href="#f">Financing</a><a href="#r">Reviews</a></div>
-<button class="btn">Free in-home quote</button></div></nav>
-
-<div class="hero"><div class="w hg">
-<div><span class="pill">Windows · Siding · Trim</span>
-<h1>A warmer house by the first cold snap.</h1>
-<p class="sub">Replacement windows and fiber cement siding installed by our own crews, never subcontracted out.</p>
-<div class="acts"><button class="btn">Free in-home quote</button><button class="btn o">See products</button></div>
-<div class="figs">
-<div><b>28%</b><span>average heating bill drop</span></div>
-<div><b>1 day</b><span>typical window install</span></div>
-<div><b>Lifetime</b><span>transferable warranty</span></div>
-</div>
-</div>
-<img src="${W[2]}" alt="">
-</div></div>
-
-<section id="p"><div class="w"><span class="eye">Products</span><h2>Two things, done properly.</h2>
-<p class="lede">We do not sell roofs, gutters or bathrooms. Windows and siding is the whole company.</p>
-<div class="rows">
-<div class="row"><img src="${W[1]}" alt="">
-<div class="tx"><h3>Replacement windows</h3><p>Triple-pane vinyl and fiberglass units, foam-sealed and capped in one visit per room.</p>
-<ul><li><b>✓</b>Argon filled, low-E coated glass</li><li><b>✓</b>Old units hauled away same day</li><li><b>✓</b>Interior trim restored, not left raw</li></ul>
-<div class="pr">from $685 per window installed</div></div></div>
-<div class="row"><img src="${W[0]}" alt="">
-<div class="tx"><h3>Fiber cement siding</h3><p>James Hardie board with house wrap, flashing and factory colour that holds for decades.</p>
-<ul><li><b>✓</b>Full tear-off and inspection of sheathing</li><li><b>✓</b>Rain screen detailing on exposed walls</li><li><b>✓</b>15 year finish, lifetime board warranty</li></ul>
-<div class="pr">from $14 per sq ft installed</div></div></div>
-</div></div></section>
-
-<section id="f" style="background:#F3F8F5"><div class="w"><span class="eye">Financing</span><h2>Spread it over the winter.</h2>
-<div class="fin">
-<div><h3>0% for 18 months.</h3><p>Approved in about ten minutes, no prepayment penalty, and the rebate paperwork for energy credits is filed by us.</p></div>
-<div class="card"><b>$149</b><span>per month · typical 8-window project</span><div style="margin-top:16px"><button class="btn" style="background:#fff;color:#1D5C46">Check my rate</button></div></div>
-</div></div></section>
-
-<section id="r"><div class="w"><span class="eye">Reviews</span><h2>Neighbours who stopped drafts.</h2>
-<div class="revs">
-<div class="rv"><div class="st">★★★★★</div><q>Eight windows in a single day and the trim looks better than what was there.</q><div class="who"><img src="${F[0]}" alt="">Robert K. · Downers Grove</div></div>
-<div class="rv"><div class="st">★★★★★</div><q>Gas bill dropped almost a third the first winter. The upstairs is finally usable.</q><div class="who"><img src="${F[1]}" alt="">Meera J. · Naperville</div></div>
-<div class="rv"><div class="st">★★★★★</div><q>They found rot behind the old siding and showed me photos before touching it.</q><div class="who"><img src="${F[2]}" alt="">Owen T. · Wheaton</div></div>
-</div></div></section>
-
-<section class="end"><div class="w"><h2>Get a real number, in your kitchen.</h2>
-<p class="lede" style="margin:14px auto 0">One visit, measured, priced and left with you in writing. No four-hour sales pitch.</p>
-<div style="margin-top:24px"><button class="btn">Book a free quote</button></div></div></section>
-
-<footer><div class="w fb"><span>Clearview Window &amp; Siding · IL Lic. 104-0177</span><span>Mon–Sat 8am–6pm</span><span>(630) 555-0148</span></div></footer>
-</body></html>`;
-
-const DEMOS = { summit, ironpeak, clearair, verdant, brightline, bramble, coppercoat, ironline, overhead, clearview };
+const DEMOS = { summit, ironpeak, clearair, verdant };
 
 const POSTS = {
   plan: { cat: "Strategy", date: "Jul 28, 2026", read: 8, img: B+"hf_20260729_234439_dede903d-5f35-4f02-87dc-e390d5fd76df.png",
