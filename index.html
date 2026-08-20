@@ -1804,7 +1804,8 @@ input::placeholder,textarea::placeholder{color:#6E7079}
           <li style="display:flex;gap:12px;align-items:flex-start;font-size:14.5px;line-height:1.45"><span style="flex:0 0 16px;color:#6E7079">◇</span>Review requests after every job</li>
           <li style="display:flex;gap:12px;align-items:flex-start;font-size:14.5px;line-height:1.45"><span style="flex:0 0 16px;color:#6E7079">◇</span>One inbox, one business number</li>
         </ul>
-        <button onClick="{{ openBook }}" style="width:100%;justify-content:center;display:inline-flex;align-items:center;gap:10px;font-family:inherit;font-weight:600;font-size:15px;padding:15px 24px;border-radius:2px;border:1px solid rgba(255,255,255,.16);background:transparent;color:#F4F4F1;cursor:pointer" style-hover="border-color:#F4F4F1">Start with Launch</button>
+        <button onClick="{{ openBook }}" style="width:100%;justify-content:center;display:inline-flex;align-items:center;gap:10px;font-family:inherit;font-weight:600;font-size:15px;padding:15px 24px;border-radius:2px;border:1px solid rgba(255,255,255,.16);background:transparent;color:#F4F4F1;cursor:pointer" style-hover="border-color:#F4F4F1">Book a 20-min call</button>
+        <button onClick="{{ startLaunch }}" style="width:100%;justify-content:center;display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-family:inherit;font-weight:500;font-size:13.5px;padding:4px 8px;border:none;background:transparent;color:#9EA0A8;cursor:pointer;transition:color .18s" style-hover="color:#F4F4F1">Start now — $497/mo →</button>
       </div>
       <div style="border:1px solid #F4F4F1;border-radius:10px;padding:44px 38px;background:#F4F4F1;color:#0A0A0B;display:flex;flex-direction:column;position:relative;transform:translateY(-8px);box-shadow:0 44px 100px -54px rgba(0,0,0,.95)">
         <span style="position:absolute;top:40px;right:38px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:#0A0A0B;color:#F4F4F1;padding:5px 10px;border-radius:2px;font-weight:500">Best value</span>
@@ -1821,7 +1822,8 @@ input::placeholder,textarea::placeholder{color:#6E7079}
           <li style="display:flex;gap:12px;align-items:flex-start;font-size:14.5px;line-height:1.45"><span style="flex:0 0 16px">◆</span>Direct line to Annie</li>
         </ul>
         <p style="font-size:13.5px;line-height:1.55;color:#3A3A3C;margin:0 0 22px">One recovered job usually pays for months of Growth. Ask us to run your numbers on the call.</p>
-        <button onClick="{{ openBook }}" style="width:100%;justify-content:center;display:inline-flex;align-items:center;gap:10px;font-family:inherit;font-weight:600;font-size:15px;padding:15px 24px;border-radius:2px;border:1px solid #0A0A0B;background:#0A0A0B;color:#F4F4F1;cursor:pointer;transition:transform .18s" style-hover="transform:translateY(-2px)">Go with Growth</button>
+        <button onClick="{{ openBook }}" style="width:100%;justify-content:center;display:inline-flex;align-items:center;gap:10px;font-family:inherit;font-weight:600;font-size:15px;padding:15px 24px;border-radius:2px;border:1px solid #0A0A0B;background:#0A0A0B;color:#F4F4F1;cursor:pointer;transition:transform .18s" style-hover="transform:translateY(-2px)">Book a 20-min call</button>
+        <button onClick="{{ startGrowth }}" style="width:100%;justify-content:center;display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-family:inherit;font-weight:500;font-size:13.5px;padding:4px 8px;border:none;background:transparent;color:#3A3A3C;cursor:pointer;transition:color .18s" style-hover="color:#0A0A0B">Start now — $797/mo →</button>
       </div>
     </div>
     <div style="margin:44px auto 0;max-width:1000px;border:1px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(17,17,19,.55);padding:26px 30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:22px;align-items:center">
@@ -2116,6 +2118,12 @@ const TRADES = [
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const SLOT_TIMES = ["9:00 am", "9:40 am", "10:20 am", "11:00 am", "1:00 pm", "1:40 pm", "2:20 pm", "3:00 pm", "3:40 pm", "4:20 pm"];
+
+// GHL checkout links for the "Start now" buttons. First month is charged on checkout,
+// then GHL automation fires onboarding + kickoff booking. Paste the live payment-link /
+// order-form URLs below to switch the buttons from the booking fallback to real checkout.
+const CHECKOUT_LAUNCH = "";  // Launch — $497/mo
+const CHECKOUT_GROWTH = "";  // Growth — $797/mo
 const BOOKING_WEBHOOK_URL = "";
 
 function dayCell(state) {
@@ -3122,6 +3130,8 @@ class Component extends DCLogic {
         open: e => { if (e && e.stopPropagation) e.stopPropagation(); this.setState({ productsOpen: false, menuOpen: false, page: "product", productKey: p.key }); this.pushPath("product"); window.scrollTo({ top: 0, behavior: "instant" }); }
       })),
       openBook: () => this.open("book"),
+      startLaunch: () => { if (CHECKOUT_LAUNCH) window.open(CHECKOUT_LAUNCH, "_blank", "noopener"); else this.open("book"); },
+      startGrowth: () => { if (CHECKOUT_GROWTH) window.open(CHECKOUT_GROWTH, "_blank", "noopener"); else this.open("book"); },
       closeModal: () => { const wasPost = this.state.modal === "post"; this.setState({ modal: null }); if (wasPost) { try { if (typeof history !== "undefined" && /^\/blog\/.+/.test(location.pathname)) history.pushState({ page: "blog" }, "", "/blog"); } catch (e) {} } },
       backdrop: e => { if (e.target === e.currentTarget) this.setState({ modal: null }); },
       toContact: () => { this.setState({ modal: null }); setTimeout(() => this.go("contact"), 60); },
